@@ -1,0 +1,112 @@
+// Colors
+$blue-gray: #283d6b;
+$dark-gray: #364b63;
+$dark-gray-9: rgba(54, 75, 99, 0.9);
+$dark-gray-8: rgba(54, 75, 99, 0.8);
+$dark-gray-7: rgba(54, 75, 99, 0.7);
+$dark-gray-6: rgba(54, 75, 99, 0.6);
+$dark-gray-5: rgba(54, 75, 99, 0.5);
+$dark-gray-4: rgba(54, 75, 99, 0.4);
+$dark-gray-3: rgba(54, 75, 99, 0.3);
+$dark-gray-2: rgba(54, 75, 99, 0.2);
+$dark-gray-1: rgba(54, 75, 99, 0.1);
+
+$light-gray: #e7e7e7;
+$light-gray-9: rgba(231, 231, 231, 0.9);
+$light-gray-8: rgba(231, 231, 231, 0.8);
+$light-gray-7: rgba(231, 231, 231, 0.7);
+$light-gray-6: rgba(231, 231, 231, 0.6);
+$light-gray-5: rgba(231, 231, 231, 0.5);
+$light-gray-4: rgba(231, 231, 231, 0.4);
+$light-gray-3: rgba(231, 231, 231, 0.3);
+$light-gray-2: rgba(231, 231, 231, 0.2);
+$light-gray-1: rgba(231, 231, 231, 0.1);
+
+$white: #fff;
+$off-white: #f6f6f6;
+$off-white-9: rgba(246, 246, 246, 0.9);
+$off-white-8: rgba(246, 246, 246, 0.8);
+$off-white-7: rgba(246, 246, 246, 0.7);
+$off-white-6: rgba(246, 246, 246, 0.6);
+$off-white-5: rgba(246, 246, 246, 0.5);
+$off-white-4: rgba(246, 246, 246, 0.4);
+$off-white-3: rgba(246, 246, 246, 0.3);
+$off-white-2: rgba(246, 246, 246, 0.2);
+$off-white-1: rgba(246, 246, 246, 0.1);
+
+$magenta: #e10098;
+$magenta-9: rgba(225, 0, 152, 0.9);
+$magenta-8: rgba(225, 0, 152, 0.8);
+$magenta-7: rgba(225, 0, 152, 0.7);
+$magenta-6: rgba(225, 0, 152, 0.6);
+$magenta-5: rgba(225, 0, 152, 0.5);
+$magenta-4: rgba(225, 0, 152, 0.4);
+$magenta-3: rgba(225, 0, 152, 0.3);
+$magenta-2: rgba(225, 0, 152, 0.2);
+$magenta-1: rgba(225, 0, 152, 0.1);
+
+$red: #ef3b3f;
+$red-9: rgba(239, 59, 63, 0.9);
+$red-8: rgba(239, 59, 63, 0.8);
+$red-7: rgba(239, 59, 63, 0.7);
+$red-6: rgba(239, 59, 63, 0.6);
+$red-5: rgba(239, 59, 63, 0.5);
+$red-4: rgba(239, 59, 63, 0.4);
+$red-3: rgba(239, 59, 63, 0.3);
+$red-2: rgba(239, 59, 63, 0.2);
+$red-1: rgba(239, 59, 63, 0.1);
+
+$orange: #ff9332;
+$orange-9: rgba(255, 147, 50, 0.9);
+$orange-8: rgba(255, 147, 50, 0.8);
+$orange-7: rgba(255, 147, 50, 0.7);
+$orange-6: rgba(255, 147, 50, 0.6);
+$orange-5: rgba(255, 147, 50, 0.5);
+$orange-4: rgba(255, 147, 50, 0.4);
+$orange-3: rgba(255, 147, 50, 0.3);
+$orange-2: rgba(255, 147, 50, 0.2);
+$orange-1: rgba(255, 147, 50, 0.1);
+
+$yellow: #fcde32;
+$yellow-9: rgba(252, 222, 50, 0.9);
+$yellow-8: rgba(252, 222, 50, 0.8);
+$yellow-7: rgba(252, 222, 50, 0.7);
+$yellow-6: rgba(252, 222, 50, 0.6);
+$yellow-5: rgba(252, 222, 50, 0.5);
+$yellow-4: rgba(252, 222, 50, 0.4);
+$yellow-3: rgba(252, 222, 50, 0.3);
+$yellow-2: rgba(252, 222, 50, 0.2);
+$yellow-1: rgba(252, 222, 50, 0.1);
+
+$green: #05c68a;
+$green-9: rgba(5, 198, 138, 0.9);
+$green-8: rgba(5, 198, 138, 0.8);
+$green-7: rgba(5, 198, 138, 0.7);
+$green-6: rgba(5, 198, 138, 0.6);
+$green-5: rgba(5, 198, 138, 0.5);
+$green-4: rgba(5, 198, 138, 0.4);
+$green-3: rgba(5, 198, 138, 0.3);
+$green-2: rgba(5, 198, 138, 0.2);
+$green-1: rgba(5, 198, 138, 0.1);
+
+$blue: #278ae8;
+$blue-9: rgba(39, 138, 232, 0.9);
+$blue-8: rgba(39, 138, 232, 0.8);
+$blue-7: rgba(39, 138, 232, 0.7);
+$blue-6: rgba(39, 138, 232, 0.6);
+$blue-5: rgba(39, 138, 232, 0.5);
+$blue-4: rgba(39, 138, 232, 0.4);
+$blue-3: rgba(39, 138, 232, 0.3);
+$blue-2: rgba(39, 138, 232, 0.2);
+$blue-1: rgba(39, 138, 232, 0.1);
+
+$violet: #8c45e8;
+$violet-9: rgba(140, 69, 232, 0.9);
+$violet-8: rgba(140, 69, 232, 0.8);
+$violet-7: rgba(140, 69, 232, 0.7);
+$violet-6: rgba(140, 69, 232, 0.6);
+$violet-5: rgba(140, 69, 232, 0.5);
+$violet-4: rgba(140, 69, 232, 0.4);
+$violet-3: rgba(140, 69, 232, 0.3);
+$violet-2: rgba(140, 69, 232, 0.2);
+$violet-1: rgba(140, 69, 232, 0.1);

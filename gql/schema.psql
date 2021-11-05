@@ -1,0 +1,293 @@
+SET check_function_bodies = false;
+CREATE FUNCTION public.set_current_timestamp_updated_at() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+  _new record;
+BEGIN
+  _new := NEW;
+  _new."updated_at" = NOW();
+  RETURN _new;
+END;
+$$;
+CREATE TABLE public.activity_logins (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    ip_address text NOT NULL,
+    "timestamp" timestamp with time zone DEFAULT now() NOT NULL
+);
+CREATE SEQUENCE public.activity_logins_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER SEQUENCE public.activity_logins_id_seq OWNED BY public.activity_logins.id;
+CREATE TABLE public.courses (
+    id integer NOT NULL,
+    slug text NOT NULL,
+    title text NOT NULL,
+    created_by_id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_by_id integer NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    summary text NOT NULL,
+    content text NOT NULL,
+    status text DEFAULT 'draft'::text NOT NULL,
+    premium boolean DEFAULT true NOT NULL,
+    price numeric DEFAULT 0.00 NOT NULL,
+    sku text NOT NULL
+);
+CREATE SEQUENCE public.courses_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER SEQUENCE public.courses_id_seq OWNED BY public.courses.id;
+CREATE TABLE public.pages (
+    id integer NOT NULL,
+    slug text NOT NULL,
+    title text NOT NULL,
+    created_by_id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_by_id integer NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    body text NOT NULL,
+    status text DEFAULT 'draft'::text NOT NULL
+);
+CREATE SEQUENCE public.pages_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER SEQUENCE public.pages_id_seq OWNED BY public.pages.id;
+CREATE TABLE public.posts (
+    id integer NOT NULL,
+    slug text NOT NULL,
+    title text NOT NULL,
+    created_by_id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_by_id integer NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    summary text NOT NULL,
+    content text NOT NULL,
+    topic_ids json NOT NULL,
+    tag_ids json NOT NULL,
+    status text DEFAULT 'draft'::text NOT NULL
+);
+CREATE SEQUENCE public.posts_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER SEQUENCE public.posts_id_seq OWNED BY public.posts.id;
+CREATE TABLE public.profiles (
+    id integer NOT NULL,
+    "user_Id" integer NOT NULL,
+    is_public boolean DEFAULT true NOT NULL,
+    avatar_url text,
+    biography text,
+    location text,
+    links json,
+    slug text NOT NULL,
+    phone_number text,
+    phone_verified boolean DEFAULT false
+);
+CREATE TABLE public.roles (
+    id integer NOT NULL,
+    type text,
+    name text,
+    description text
+);
+CREATE TABLE public.tags (
+    id integer NOT NULL,
+    slug text NOT NULL,
+    title text NOT NULL,
+    created_by_id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_by_id integer NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
+);
+CREATE SEQUENCE public.tags_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER SEQUENCE public.tags_id_seq OWNED BY public.tags.id;
+CREATE TABLE public.topics (
+    id integer NOT NULL,
+    slug text NOT NULL,
+    title text NOT NULL,
+    created_by_id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_by_id integer NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    parent_topic_ids json
+);
+CREATE SEQUENCE public.topics_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER SEQUENCE public.topics_id_seq OWNED BY public.topics.id;
+CREATE SEQUENCE public.user_meta_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER SEQUENCE public.user_meta_id_seq OWNED BY public.profiles.id;
+CREATE SEQUENCE public.user_types_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER SEQUENCE public.user_types_id_seq OWNED BY public.roles.id;
+CREATE TABLE public.users (
+    id integer NOT NULL,
+    first_name text NOT NULL,
+    last_name text NOT NULL,
+    created_by_id integer,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_by_id integer,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    role_id integer NOT NULL,
+    last_active timestamp with time zone DEFAULT now(),
+    email_address text,
+    username text,
+    verified boolean DEFAULT false NOT NULL,
+    full_name text,
+    status text DEFAULT 'active'::text NOT NULL,
+    pronouns text
+);
+CREATE SEQUENCE public.users_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+ALTER TABLE ONLY public.activity_logins ALTER COLUMN id SET DEFAULT nextval('public.activity_logins_id_seq'::regclass);
+ALTER TABLE ONLY public.courses ALTER COLUMN id SET DEFAULT nextval('public.courses_id_seq'::regclass);
+ALTER TABLE ONLY public.pages ALTER COLUMN id SET DEFAULT nextval('public.pages_id_seq'::regclass);
+ALTER TABLE ONLY public.posts ALTER COLUMN id SET DEFAULT nextval('public.posts_id_seq'::regclass);
+ALTER TABLE ONLY public.profiles ALTER COLUMN id SET DEFAULT nextval('public.user_meta_id_seq'::regclass);
+ALTER TABLE ONLY public.roles ALTER COLUMN id SET DEFAULT nextval('public.user_types_id_seq'::regclass);
+ALTER TABLE ONLY public.tags ALTER COLUMN id SET DEFAULT nextval('public.tags_id_seq'::regclass);
+ALTER TABLE ONLY public.topics ALTER COLUMN id SET DEFAULT nextval('public.topics_id_seq'::regclass);
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+ALTER TABLE ONLY public.activity_logins
+    ADD CONSTRAINT activity_logins_id_key UNIQUE (id);
+ALTER TABLE ONLY public.activity_logins
+    ADD CONSTRAINT activity_logins_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.activity_logins
+    ADD CONSTRAINT activity_logins_user_id_timestamp_key UNIQUE (user_id, "timestamp");
+ALTER TABLE ONLY public.courses
+    ADD CONSTRAINT courses_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.courses
+    ADD CONSTRAINT courses_sku_key UNIQUE (sku);
+ALTER TABLE ONLY public.courses
+    ADD CONSTRAINT courses_slug_key UNIQUE (slug);
+ALTER TABLE ONLY public.courses
+    ADD CONSTRAINT courses_title_key UNIQUE (title);
+ALTER TABLE ONLY public.pages
+    ADD CONSTRAINT pages_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.pages
+    ADD CONSTRAINT pages_slug_key UNIQUE (slug);
+ALTER TABLE ONLY public.pages
+    ADD CONSTRAINT pages_title_key UNIQUE (title);
+ALTER TABLE ONLY public.posts
+    ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.posts
+    ADD CONSTRAINT posts_slug_key UNIQUE (slug);
+ALTER TABLE ONLY public.posts
+    ADD CONSTRAINT posts_title_key UNIQUE (title);
+ALTER TABLE ONLY public.roles
+    ADD CONSTRAINT roles_name_key UNIQUE (name);
+ALTER TABLE ONLY public.roles
+    ADD CONSTRAINT roles_shortname_key UNIQUE (type);
+ALTER TABLE ONLY public.tags
+    ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.tags
+    ADD CONSTRAINT tags_slug_key UNIQUE (slug);
+ALTER TABLE ONLY public.tags
+    ADD CONSTRAINT tags_title_key UNIQUE (title);
+ALTER TABLE ONLY public.topics
+    ADD CONSTRAINT topics_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.topics
+    ADD CONSTRAINT topics_slug_key UNIQUE (slug);
+ALTER TABLE ONLY public.topics
+    ADD CONSTRAINT topics_title_key UNIQUE (title);
+ALTER TABLE ONLY public.profiles
+    ADD CONSTRAINT user_meta_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.profiles
+    ADD CONSTRAINT "user_meta_user_Id_key" UNIQUE ("user_Id");
+ALTER TABLE ONLY public.profiles
+    ADD CONSTRAINT user_profiles_phone_number_key UNIQUE (phone_number);
+ALTER TABLE ONLY public.profiles
+    ADD CONSTRAINT user_profiles_slug_key UNIQUE (slug);
+ALTER TABLE ONLY public.roles
+    ADD CONSTRAINT user_types_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_email_key UNIQUE (email_address);
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_username_key UNIQUE (username);
+CREATE TRIGGER set_public_courses_updated_at BEFORE UPDATE ON public.courses FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_updated_at();
+COMMENT ON TRIGGER set_public_courses_updated_at ON public.courses IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+CREATE TRIGGER set_public_pages_updated_at BEFORE UPDATE ON public.pages FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_updated_at();
+COMMENT ON TRIGGER set_public_pages_updated_at ON public.pages IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+CREATE TRIGGER set_public_posts_updated_at BEFORE UPDATE ON public.posts FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_updated_at();
+COMMENT ON TRIGGER set_public_posts_updated_at ON public.posts IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+CREATE TRIGGER set_public_tags_updated_at BEFORE UPDATE ON public.tags FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_updated_at();
+COMMENT ON TRIGGER set_public_tags_updated_at ON public.tags IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+CREATE TRIGGER set_public_topics_updated_at BEFORE UPDATE ON public.topics FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_updated_at();
+COMMENT ON TRIGGER set_public_topics_updated_at ON public.topics IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+CREATE TRIGGER set_public_users_updated_at BEFORE UPDATE ON public.users FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_updated_at();
+COMMENT ON TRIGGER set_public_users_updated_at ON public.users IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+ALTER TABLE ONLY public.activity_logins
+    ADD CONSTRAINT activity_logins_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.courses
+    ADD CONSTRAINT courses_created_by_id_fkey FOREIGN KEY (created_by_id) REFERENCES public.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.courses
+    ADD CONSTRAINT courses_updated_by_id_fkey FOREIGN KEY (updated_by_id) REFERENCES public.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.pages
+    ADD CONSTRAINT pages_created_by_id_fkey FOREIGN KEY (created_by_id) REFERENCES public.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.pages
+    ADD CONSTRAINT pages_updated_by_id_fkey FOREIGN KEY (updated_by_id) REFERENCES public.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.posts
+    ADD CONSTRAINT posts_created_by_id_fkey FOREIGN KEY (created_by_id) REFERENCES public.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.posts
+    ADD CONSTRAINT posts_updated_by_id_fkey FOREIGN KEY (updated_by_id) REFERENCES public.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.tags
+    ADD CONSTRAINT tags_created_by_id_fkey FOREIGN KEY (created_by_id) REFERENCES public.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.tags
+    ADD CONSTRAINT tags_updated_by_id_fkey FOREIGN KEY (updated_by_id) REFERENCES public.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.topics
+    ADD CONSTRAINT topics_created_by_id_fkey FOREIGN KEY (created_by_id) REFERENCES public.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.topics
+    ADD CONSTRAINT topics_updated_by_id_fkey FOREIGN KEY (updated_by_id) REFERENCES public.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.profiles
+    ADD CONSTRAINT "user_meta_user_Id_fkey" FOREIGN KEY ("user_Id") REFERENCES public.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_created_by_id_fkey FOREIGN KEY (created_by_id) REFERENCES public.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_type_id_fkey FOREIGN KEY (role_id) REFERENCES public.roles(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_updated_by_id_fkey FOREIGN KEY (updated_by_id) REFERENCES public.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;

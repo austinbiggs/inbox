@@ -1,0 +1,22 @@
+query GetPosts($limit: Int!, $status: String!) {
+  posts(
+    where: { status: { _eq: $status } }
+    limit: $limit
+    order_by: { createdAt: desc, title: asc }
+  ) {
+    createdAt
+    id
+    slug
+    status
+    title
+    updatedAt
+    userByUpdatedById {
+      fullName
+      username
+    }
+    userByCreatedById {
+      fullName
+      username
+    }
+  }
+}

@@ -1,20 +1,47 @@
 {
-  "name": "nextjs",
+  "name": "Inbox",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
+    "codegen": "graphql-codegen",
+    "codegen:watch": "graphql-codegen --watch",
+    "dev": "next dev",
+    "format": "prettier --write .",
+    "lint": "next lint",
+    "predev": "yarn codegen",
+    "prestart": "yarn codegen",
     "start": "next start",
-    "lint": "next lint"
+    "sync": "node ./hooks/sync && yarn prettier --write ./gql > /dev/null",
+    "sync:metadata": "node ./hooks/sync/metadata.js && yarn prettier --write ./gql/metadata.json",
+    "sync:postgres": "node ./hooks/sync/postgres.js",
+    "sync:schema:gql": "node ./hooks/sync/graphqurl/schema-as-gql.js && yarn prettier --write ./gql/schema.gql",
+    "type:check": "tsc --pretty --noEmit"
   },
   "dependencies": {
+    "@apollo/client": "^3.4.16",
+    "change-case": "^4.1.2",
+    "classnames": "^2.3.1",
+    "faker": "^5.5.3",
+    "graphql": "^16.0.1",
+    "graphqurl": "^1.0.1",
+    "lodash": "^4.17.21",
     "next": "12.0.3",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-bootstrap": "^2.0.2",
+    "react-dom": "17.0.2",
+    "react-hook-form": "^7.19.0",
+    "sass": "^1.43.4"
   },
   "devDependencies": {
+    "@types/classnames": "^2.3.1",
+    "@types/lodash": "^4.14.176",
+    "@types/node": "^16.11.6",
+    "@types/react": "^17.0.34",
     "eslint": "7.32.0",
-    "eslint-config-next": "11.1.0"
+    "eslint-config-next": "11.1.0",
+    "husky": "^7.0.4",
+    "prettier": "^2.4.1",
+    "typescript": "^4.4.4"
   }
 }

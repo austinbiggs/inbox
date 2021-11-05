@@ -1,0 +1,18 @@
+query GetPages($limit: Int!, $status: String!) {
+  pages(
+    where: { status: { _eq: $status } }
+    limit: $limit
+    order_by: { createdAt: desc, title: asc }
+  ) {
+    createdAt
+    id
+    slug
+    status
+    title
+    updatedAt
+    userByUpdatedById {
+      fullName
+      username
+    }
+  }
+}

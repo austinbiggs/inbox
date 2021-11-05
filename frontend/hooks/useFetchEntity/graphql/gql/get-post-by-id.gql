@@ -1,0 +1,18 @@
+query GetPostById($id: Int!) {
+  post(id: $id) {
+    id
+    createdAt
+    updatedAt
+    status
+    slug
+    title
+    content
+    summary
+    userByCreatedById {
+      fullName
+    }
+    userByUpdatedById {
+      fullName
+    }
+  }
+}
