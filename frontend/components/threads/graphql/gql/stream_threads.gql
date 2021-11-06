@@ -1,0 +1,17 @@
+subscription StreamThreads($userId: Int!) {
+  threads(where: {threads_users: {user_id: {_eq: $userId}}}) {
+    id
+    messages(limit: 1, order_by: {created_at: desc}, where: {status: {_eq: "sent"}}) {
+      body
+      created_at
+      created_by
+    }
+    threads_users {
+      user {
+        id
+        image_url
+        name
+      }
+    }
+  }
+}
