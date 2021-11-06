@@ -5,10 +5,93 @@
       "name": "default",
       "kind": "postgres",
       "tables": [
-        { "table": { "schema": "public", "name": "messages" } },
-        { "table": { "schema": "public", "name": "threads" } },
-        { "table": { "schema": "public", "name": "threads_users" } },
-        { "table": { "schema": "public", "name": "users" } }
+        {
+          "table": { "schema": "public", "name": "messages" },
+          "object_relationships": [
+            {
+              "name": "thread",
+              "using": { "foreign_key_constraint_on": "thread_id" }
+            },
+            {
+              "name": "user",
+              "using": { "foreign_key_constraint_on": "created_by" }
+            }
+          ]
+        },
+        {
+          "table": { "schema": "public", "name": "threads" },
+          "object_relationships": [
+            {
+              "name": "user",
+              "using": { "foreign_key_constraint_on": "created_by" }
+            }
+          ],
+          "array_relationships": [
+            {
+              "name": "messages",
+              "using": {
+                "foreign_key_constraint_on": {
+                  "column": "thread_id",
+                  "table": { "schema": "public", "name": "messages" }
+                }
+              }
+            },
+            {
+              "name": "threads_users",
+              "using": {
+                "foreign_key_constraint_on": {
+                  "column": "thread_id",
+                  "table": { "schema": "public", "name": "threads_users" }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "table": { "schema": "public", "name": "threads_users" },
+          "object_relationships": [
+            {
+              "name": "thread",
+              "using": { "foreign_key_constraint_on": "thread_id" }
+            },
+            {
+              "name": "user",
+              "using": { "foreign_key_constraint_on": "user_id" }
+            }
+          ]
+        },
+        {
+          "table": { "schema": "public", "name": "users" },
+          "array_relationships": [
+            {
+              "name": "messages",
+              "using": {
+                "foreign_key_constraint_on": {
+                  "column": "created_by",
+                  "table": { "schema": "public", "name": "messages" }
+                }
+              }
+            },
+            {
+              "name": "threads",
+              "using": {
+                "foreign_key_constraint_on": {
+                  "column": "created_by",
+                  "table": { "schema": "public", "name": "threads" }
+                }
+              }
+            },
+            {
+              "name": "threads_users",
+              "using": {
+                "foreign_key_constraint_on": {
+                  "column": "user_id",
+                  "table": { "schema": "public", "name": "threads_users" }
+                }
+              }
+            }
+          ]
+        }
       ],
       "configuration": {
         "connection_info": {

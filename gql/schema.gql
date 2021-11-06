@@ -108,8 +108,18 @@ type messages {
   created_by: Int!
   id: uuid!
   status: String!
+
+  """
+  An object relationship
+  """
+  thread: threads!
   thread_id: Int!
   updated_at: timestamptz!
+
+  """
+  An object relationship
+  """
+  user: users!
 }
 
 """
@@ -138,11 +148,48 @@ type messages_aggregate_fields {
 }
 
 """
+order by aggregate values of table "messages"
+"""
+input messages_aggregate_order_by {
+  avg: messages_avg_order_by
+  count: order_by
+  max: messages_max_order_by
+  min: messages_min_order_by
+  stddev: messages_stddev_order_by
+  stddev_pop: messages_stddev_pop_order_by
+  stddev_samp: messages_stddev_samp_order_by
+  sum: messages_sum_order_by
+  var_pop: messages_var_pop_order_by
+  var_samp: messages_var_samp_order_by
+  variance: messages_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "messages"
+"""
+input messages_arr_rel_insert_input {
+  data: [messages_insert_input!]!
+
+  """
+  on conflict condition
+  """
+  on_conflict: messages_on_conflict
+}
+
+"""
 aggregate avg on columns
 """
 type messages_avg_fields {
   created_by: Float
   thread_id: Float
+}
+
+"""
+order by avg() on columns of table "messages"
+"""
+input messages_avg_order_by {
+  created_by: order_by
+  thread_id: order_by
 }
 
 """
@@ -157,8 +204,10 @@ input messages_bool_exp {
   created_by: Int_comparison_exp
   id: uuid_comparison_exp
   status: String_comparison_exp
+  thread: threads_bool_exp
   thread_id: Int_comparison_exp
   updated_at: timestamptz_comparison_exp
+  user: users_bool_exp
 }
 
 """
@@ -188,8 +237,10 @@ input messages_insert_input {
   created_by: Int
   id: uuid
   status: String
+  thread: threads_obj_rel_insert_input
   thread_id: Int
   updated_at: timestamptz
+  user: users_obj_rel_insert_input
 }
 
 """
@@ -206,6 +257,19 @@ type messages_max_fields {
 }
 
 """
+order by max() on columns of table "messages"
+"""
+input messages_max_order_by {
+  body: order_by
+  created_at: order_by
+  created_by: order_by
+  id: order_by
+  status: order_by
+  thread_id: order_by
+  updated_at: order_by
+}
+
+"""
 aggregate min on columns
 """
 type messages_min_fields {
@@ -216,6 +280,19 @@ type messages_min_fields {
   status: String
   thread_id: Int
   updated_at: timestamptz
+}
+
+"""
+order by min() on columns of table "messages"
+"""
+input messages_min_order_by {
+  body: order_by
+  created_at: order_by
+  created_by: order_by
+  id: order_by
+  status: order_by
+  thread_id: order_by
+  updated_at: order_by
 }
 
 """
@@ -251,8 +328,10 @@ input messages_order_by {
   created_by: order_by
   id: order_by
   status: order_by
+  thread: threads_order_by
   thread_id: order_by
   updated_at: order_by
+  user: users_order_by
 }
 
 """
@@ -324,11 +403,27 @@ type messages_stddev_fields {
 }
 
 """
+order by stddev() on columns of table "messages"
+"""
+input messages_stddev_order_by {
+  created_by: order_by
+  thread_id: order_by
+}
+
+"""
 aggregate stddev_pop on columns
 """
 type messages_stddev_pop_fields {
   created_by: Float
   thread_id: Float
+}
+
+"""
+order by stddev_pop() on columns of table "messages"
+"""
+input messages_stddev_pop_order_by {
+  created_by: order_by
+  thread_id: order_by
 }
 
 """
@@ -340,11 +435,27 @@ type messages_stddev_samp_fields {
 }
 
 """
+order by stddev_samp() on columns of table "messages"
+"""
+input messages_stddev_samp_order_by {
+  created_by: order_by
+  thread_id: order_by
+}
+
+"""
 aggregate sum on columns
 """
 type messages_sum_fields {
   created_by: Int
   thread_id: Int
+}
+
+"""
+order by sum() on columns of table "messages"
+"""
+input messages_sum_order_by {
+  created_by: order_by
+  thread_id: order_by
 }
 
 """
@@ -396,6 +507,14 @@ type messages_var_pop_fields {
 }
 
 """
+order by var_pop() on columns of table "messages"
+"""
+input messages_var_pop_order_by {
+  created_by: order_by
+  thread_id: order_by
+}
+
+"""
 aggregate var_samp on columns
 """
 type messages_var_samp_fields {
@@ -404,11 +523,27 @@ type messages_var_samp_fields {
 }
 
 """
+order by var_samp() on columns of table "messages"
+"""
+input messages_var_samp_order_by {
+  created_by: order_by
+  thread_id: order_by
+}
+
+"""
 aggregate variance on columns
 """
 type messages_variance_fields {
   created_by: Float
   thread_id: Float
+}
+
+"""
+order by variance() on columns of table "messages"
+"""
+input messages_variance_order_by {
+  created_by: order_by
+  thread_id: order_by
 }
 
 """
@@ -777,7 +912,7 @@ enum order_by {
 
 type query_root {
   """
-  fetch data from the table: "messages"
+  An array relationship
   """
   messages(
     """
@@ -807,7 +942,7 @@ type query_root {
   ): [messages!]!
 
   """
-  fetch aggregated fields from the table: "messages"
+  An aggregate relationship
   """
   messages_aggregate(
     """
@@ -842,7 +977,7 @@ type query_root {
   messages_by_pk(id: uuid!): messages
 
   """
-  fetch data from the table: "threads"
+  An array relationship
   """
   threads(
     """
@@ -872,7 +1007,7 @@ type query_root {
   ): [threads!]!
 
   """
-  fetch aggregated fields from the table: "threads"
+  An aggregate relationship
   """
   threads_aggregate(
     """
@@ -907,7 +1042,7 @@ type query_root {
   threads_by_pk(id: Int!): threads
 
   """
-  fetch data from the table: "threads_users"
+  An array relationship
   """
   threads_users(
     """
@@ -937,7 +1072,7 @@ type query_root {
   ): [threads_users!]!
 
   """
-  fetch aggregated fields from the table: "threads_users"
+  An aggregate relationship
   """
   threads_users_aggregate(
     """
@@ -1039,7 +1174,7 @@ type query_root {
 
 type subscription_root {
   """
-  fetch data from the table: "messages"
+  An array relationship
   """
   messages(
     """
@@ -1069,7 +1204,7 @@ type subscription_root {
   ): [messages!]!
 
   """
-  fetch aggregated fields from the table: "messages"
+  An aggregate relationship
   """
   messages_aggregate(
     """
@@ -1104,7 +1239,7 @@ type subscription_root {
   messages_by_pk(id: uuid!): messages
 
   """
-  fetch data from the table: "threads"
+  An array relationship
   """
   threads(
     """
@@ -1134,7 +1269,7 @@ type subscription_root {
   ): [threads!]!
 
   """
-  fetch aggregated fields from the table: "threads"
+  An aggregate relationship
   """
   threads_aggregate(
     """
@@ -1169,7 +1304,7 @@ type subscription_root {
   threads_by_pk(id: Int!): threads
 
   """
-  fetch data from the table: "threads_users"
+  An array relationship
   """
   threads_users(
     """
@@ -1199,7 +1334,7 @@ type subscription_root {
   ): [threads_users!]!
 
   """
-  fetch aggregated fields from the table: "threads_users"
+  An aggregate relationship
   """
   threads_users_aggregate(
     """
@@ -1306,7 +1441,132 @@ type threads {
   created_at: timestamptz!
   created_by: Int!
   id: Int!
+
+  """
+  An array relationship
+  """
+  messages(
+    """
+    distinct select on columns
+    """
+    distinct_on: [messages_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [messages_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: messages_bool_exp
+  ): [messages!]!
+
+  """
+  An aggregate relationship
+  """
+  messages_aggregate(
+    """
+    distinct select on columns
+    """
+    distinct_on: [messages_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [messages_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: messages_bool_exp
+  ): messages_aggregate!
+
+  """
+  An array relationship
+  """
+  threads_users(
+    """
+    distinct select on columns
+    """
+    distinct_on: [threads_users_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [threads_users_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: threads_users_bool_exp
+  ): [threads_users!]!
+
+  """
+  An aggregate relationship
+  """
+  threads_users_aggregate(
+    """
+    distinct select on columns
+    """
+    distinct_on: [threads_users_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [threads_users_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: threads_users_bool_exp
+  ): threads_users_aggregate!
   updated_at: timestamptz!
+
+  """
+  An object relationship
+  """
+  user: users!
 }
 
 """
@@ -1335,11 +1595,48 @@ type threads_aggregate_fields {
 }
 
 """
+order by aggregate values of table "threads"
+"""
+input threads_aggregate_order_by {
+  avg: threads_avg_order_by
+  count: order_by
+  max: threads_max_order_by
+  min: threads_min_order_by
+  stddev: threads_stddev_order_by
+  stddev_pop: threads_stddev_pop_order_by
+  stddev_samp: threads_stddev_samp_order_by
+  sum: threads_sum_order_by
+  var_pop: threads_var_pop_order_by
+  var_samp: threads_var_samp_order_by
+  variance: threads_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "threads"
+"""
+input threads_arr_rel_insert_input {
+  data: [threads_insert_input!]!
+
+  """
+  on conflict condition
+  """
+  on_conflict: threads_on_conflict
+}
+
+"""
 aggregate avg on columns
 """
 type threads_avg_fields {
   created_by: Float
   id: Float
+}
+
+"""
+order by avg() on columns of table "threads"
+"""
+input threads_avg_order_by {
+  created_by: order_by
+  id: order_by
 }
 
 """
@@ -1352,7 +1649,10 @@ input threads_bool_exp {
   created_at: timestamptz_comparison_exp
   created_by: Int_comparison_exp
   id: Int_comparison_exp
+  messages: messages_bool_exp
+  threads_users: threads_users_bool_exp
   updated_at: timestamptz_comparison_exp
+  user: users_bool_exp
 }
 
 """
@@ -1380,7 +1680,10 @@ input threads_insert_input {
   created_at: timestamptz
   created_by: Int
   id: Int
+  messages: messages_arr_rel_insert_input
+  threads_users: threads_users_arr_rel_insert_input
   updated_at: timestamptz
+  user: users_obj_rel_insert_input
 }
 
 """
@@ -1394,6 +1697,16 @@ type threads_max_fields {
 }
 
 """
+order by max() on columns of table "threads"
+"""
+input threads_max_order_by {
+  created_at: order_by
+  created_by: order_by
+  id: order_by
+  updated_at: order_by
+}
+
+"""
 aggregate min on columns
 """
 type threads_min_fields {
@@ -1401,6 +1714,16 @@ type threads_min_fields {
   created_by: Int
   id: Int
   updated_at: timestamptz
+}
+
+"""
+order by min() on columns of table "threads"
+"""
+input threads_min_order_by {
+  created_at: order_by
+  created_by: order_by
+  id: order_by
+  updated_at: order_by
 }
 
 """
@@ -1419,6 +1742,18 @@ type threads_mutation_response {
 }
 
 """
+input type for inserting object relation for remote table "threads"
+"""
+input threads_obj_rel_insert_input {
+  data: threads_insert_input!
+
+  """
+  on conflict condition
+  """
+  on_conflict: threads_on_conflict
+}
+
+"""
 on conflict condition type for table "threads"
 """
 input threads_on_conflict {
@@ -1434,7 +1769,10 @@ input threads_order_by {
   created_at: order_by
   created_by: order_by
   id: order_by
+  messages_aggregate: messages_aggregate_order_by
+  threads_users_aggregate: threads_users_aggregate_order_by
   updated_at: order_by
+  user: users_order_by
 }
 
 """
@@ -1488,11 +1826,27 @@ type threads_stddev_fields {
 }
 
 """
+order by stddev() on columns of table "threads"
+"""
+input threads_stddev_order_by {
+  created_by: order_by
+  id: order_by
+}
+
+"""
 aggregate stddev_pop on columns
 """
 type threads_stddev_pop_fields {
   created_by: Float
   id: Float
+}
+
+"""
+order by stddev_pop() on columns of table "threads"
+"""
+input threads_stddev_pop_order_by {
+  created_by: order_by
+  id: order_by
 }
 
 """
@@ -1504,11 +1858,27 @@ type threads_stddev_samp_fields {
 }
 
 """
+order by stddev_samp() on columns of table "threads"
+"""
+input threads_stddev_samp_order_by {
+  created_by: order_by
+  id: order_by
+}
+
+"""
 aggregate sum on columns
 """
 type threads_sum_fields {
   created_by: Int
   id: Int
+}
+
+"""
+order by sum() on columns of table "threads"
+"""
+input threads_sum_order_by {
+  created_by: order_by
+  id: order_by
 }
 
 """
@@ -1542,8 +1912,18 @@ columns and relationships of "threads_users"
 type threads_users {
   created_at: timestamptz!
   id: Int!
+
+  """
+  An object relationship
+  """
+  thread: threads!
   thread_id: Int!
   updated_at: timestamptz!
+
+  """
+  An object relationship
+  """
+  user: users!
   user_id: Int!
 }
 
@@ -1573,12 +1953,50 @@ type threads_users_aggregate_fields {
 }
 
 """
+order by aggregate values of table "threads_users"
+"""
+input threads_users_aggregate_order_by {
+  avg: threads_users_avg_order_by
+  count: order_by
+  max: threads_users_max_order_by
+  min: threads_users_min_order_by
+  stddev: threads_users_stddev_order_by
+  stddev_pop: threads_users_stddev_pop_order_by
+  stddev_samp: threads_users_stddev_samp_order_by
+  sum: threads_users_sum_order_by
+  var_pop: threads_users_var_pop_order_by
+  var_samp: threads_users_var_samp_order_by
+  variance: threads_users_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "threads_users"
+"""
+input threads_users_arr_rel_insert_input {
+  data: [threads_users_insert_input!]!
+
+  """
+  on conflict condition
+  """
+  on_conflict: threads_users_on_conflict
+}
+
+"""
 aggregate avg on columns
 """
 type threads_users_avg_fields {
   id: Float
   thread_id: Float
   user_id: Float
+}
+
+"""
+order by avg() on columns of table "threads_users"
+"""
+input threads_users_avg_order_by {
+  id: order_by
+  thread_id: order_by
+  user_id: order_by
 }
 
 """
@@ -1590,8 +2008,10 @@ input threads_users_bool_exp {
   _or: [threads_users_bool_exp!]
   created_at: timestamptz_comparison_exp
   id: Int_comparison_exp
+  thread: threads_bool_exp
   thread_id: Int_comparison_exp
   updated_at: timestamptz_comparison_exp
+  user: users_bool_exp
   user_id: Int_comparison_exp
 }
 
@@ -1620,8 +2040,10 @@ input type for inserting data into table "threads_users"
 input threads_users_insert_input {
   created_at: timestamptz
   id: Int
+  thread: threads_obj_rel_insert_input
   thread_id: Int
   updated_at: timestamptz
+  user: users_obj_rel_insert_input
   user_id: Int
 }
 
@@ -1637,6 +2059,17 @@ type threads_users_max_fields {
 }
 
 """
+order by max() on columns of table "threads_users"
+"""
+input threads_users_max_order_by {
+  created_at: order_by
+  id: order_by
+  thread_id: order_by
+  updated_at: order_by
+  user_id: order_by
+}
+
+"""
 aggregate min on columns
 """
 type threads_users_min_fields {
@@ -1645,6 +2078,17 @@ type threads_users_min_fields {
   thread_id: Int
   updated_at: timestamptz
   user_id: Int
+}
+
+"""
+order by min() on columns of table "threads_users"
+"""
+input threads_users_min_order_by {
+  created_at: order_by
+  id: order_by
+  thread_id: order_by
+  updated_at: order_by
+  user_id: order_by
 }
 
 """
@@ -1677,8 +2121,10 @@ Ordering options when selecting data from "threads_users".
 input threads_users_order_by {
   created_at: order_by
   id: order_by
+  thread: threads_order_by
   thread_id: order_by
   updated_at: order_by
+  user: users_order_by
   user_id: order_by
 }
 
@@ -1740,12 +2186,30 @@ type threads_users_stddev_fields {
 }
 
 """
+order by stddev() on columns of table "threads_users"
+"""
+input threads_users_stddev_order_by {
+  id: order_by
+  thread_id: order_by
+  user_id: order_by
+}
+
+"""
 aggregate stddev_pop on columns
 """
 type threads_users_stddev_pop_fields {
   id: Float
   thread_id: Float
   user_id: Float
+}
+
+"""
+order by stddev_pop() on columns of table "threads_users"
+"""
+input threads_users_stddev_pop_order_by {
+  id: order_by
+  thread_id: order_by
+  user_id: order_by
 }
 
 """
@@ -1758,12 +2222,30 @@ type threads_users_stddev_samp_fields {
 }
 
 """
+order by stddev_samp() on columns of table "threads_users"
+"""
+input threads_users_stddev_samp_order_by {
+  id: order_by
+  thread_id: order_by
+  user_id: order_by
+}
+
+"""
 aggregate sum on columns
 """
 type threads_users_sum_fields {
   id: Int
   thread_id: Int
   user_id: Int
+}
+
+"""
+order by sum() on columns of table "threads_users"
+"""
+input threads_users_sum_order_by {
+  id: order_by
+  thread_id: order_by
+  user_id: order_by
 }
 
 """
@@ -1806,12 +2288,30 @@ type threads_users_var_pop_fields {
 }
 
 """
+order by var_pop() on columns of table "threads_users"
+"""
+input threads_users_var_pop_order_by {
+  id: order_by
+  thread_id: order_by
+  user_id: order_by
+}
+
+"""
 aggregate var_samp on columns
 """
 type threads_users_var_samp_fields {
   id: Float
   thread_id: Float
   user_id: Float
+}
+
+"""
+order by var_samp() on columns of table "threads_users"
+"""
+input threads_users_var_samp_order_by {
+  id: order_by
+  thread_id: order_by
+  user_id: order_by
 }
 
 """
@@ -1824,11 +2324,28 @@ type threads_users_variance_fields {
 }
 
 """
+order by variance() on columns of table "threads_users"
+"""
+input threads_users_variance_order_by {
+  id: order_by
+  thread_id: order_by
+  user_id: order_by
+}
+
+"""
 aggregate var_pop on columns
 """
 type threads_var_pop_fields {
   created_by: Float
   id: Float
+}
+
+"""
+order by var_pop() on columns of table "threads"
+"""
+input threads_var_pop_order_by {
+  created_by: order_by
+  id: order_by
 }
 
 """
@@ -1840,11 +2357,27 @@ type threads_var_samp_fields {
 }
 
 """
+order by var_samp() on columns of table "threads"
+"""
+input threads_var_samp_order_by {
+  created_by: order_by
+  id: order_by
+}
+
+"""
 aggregate variance on columns
 """
 type threads_variance_fields {
   created_by: Float
   id: Float
+}
+
+"""
+order by variance() on columns of table "threads"
+"""
+input threads_variance_order_by {
+  created_by: order_by
+  id: order_by
 }
 
 scalar timestamptz
@@ -1872,7 +2405,187 @@ type users {
   email: String!
   id: Int!
   image_url: String
+
+  """
+  An array relationship
+  """
+  messages(
+    """
+    distinct select on columns
+    """
+    distinct_on: [messages_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [messages_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: messages_bool_exp
+  ): [messages!]!
+
+  """
+  An aggregate relationship
+  """
+  messages_aggregate(
+    """
+    distinct select on columns
+    """
+    distinct_on: [messages_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [messages_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: messages_bool_exp
+  ): messages_aggregate!
   name: String!
+
+  """
+  An array relationship
+  """
+  threads(
+    """
+    distinct select on columns
+    """
+    distinct_on: [threads_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [threads_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: threads_bool_exp
+  ): [threads!]!
+
+  """
+  An aggregate relationship
+  """
+  threads_aggregate(
+    """
+    distinct select on columns
+    """
+    distinct_on: [threads_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [threads_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: threads_bool_exp
+  ): threads_aggregate!
+
+  """
+  An array relationship
+  """
+  threads_users(
+    """
+    distinct select on columns
+    """
+    distinct_on: [threads_users_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [threads_users_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: threads_users_bool_exp
+  ): [threads_users!]!
+
+  """
+  An aggregate relationship
+  """
+  threads_users_aggregate(
+    """
+    distinct select on columns
+    """
+    distinct_on: [threads_users_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [threads_users_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: threads_users_bool_exp
+  ): threads_users_aggregate!
   updated_at: timestamptz!
 }
 
@@ -1919,7 +2632,10 @@ input users_bool_exp {
   email: String_comparison_exp
   id: Int_comparison_exp
   image_url: String_comparison_exp
+  messages: messages_bool_exp
   name: String_comparison_exp
+  threads: threads_bool_exp
+  threads_users: threads_users_bool_exp
   updated_at: timestamptz_comparison_exp
 }
 
@@ -1953,7 +2669,10 @@ input users_insert_input {
   email: String
   id: Int
   image_url: String
+  messages: messages_arr_rel_insert_input
   name: String
+  threads: threads_arr_rel_insert_input
+  threads_users: threads_users_arr_rel_insert_input
   updated_at: timestamptz
 }
 
@@ -1997,6 +2716,18 @@ type users_mutation_response {
 }
 
 """
+input type for inserting object relation for remote table "users"
+"""
+input users_obj_rel_insert_input {
+  data: users_insert_input!
+
+  """
+  on conflict condition
+  """
+  on_conflict: users_on_conflict
+}
+
+"""
 on conflict condition type for table "users"
 """
 input users_on_conflict {
@@ -2013,7 +2744,10 @@ input users_order_by {
   email: order_by
   id: order_by
   image_url: order_by
+  messages_aggregate: messages_aggregate_order_by
   name: order_by
+  threads_aggregate: threads_aggregate_order_by
+  threads_users_aggregate: threads_users_aggregate_order_by
   updated_at: order_by
 }
 
