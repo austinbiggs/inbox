@@ -44,7 +44,7 @@
     "@graphql-codegen/typescript-operations": "^2.2.0",
     "@graphql-codegen/typescript-react-apollo": "^3.2.0",
     "@graphql-tools/load": "^7.4.1",
-    "@graphql-tools/utils": "^8.5.2",
+    "@graphql-tools/utils": "^8.5.3",
     "@types/classnames": "^2.3.1",
     "@types/lodash": "^4.14.176",
     "@types/node": "^16.11.6",
