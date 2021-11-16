@@ -46,7 +46,7 @@
     "@graphql-tools/load": "^7.4.1",
     "@graphql-tools/utils": "^8.5.3",
     "@types/classnames": "^2.3.1",
-    "@types/lodash": "^4.14.176",
+    "@types/lodash": "^4.14.177",
     "@types/node": "^16.11.7",
     "@types/react": "^17.0.34",
     "eslint": "7.32.0",
