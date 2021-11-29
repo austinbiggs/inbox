@@ -9,7 +9,7 @@ const Home = () => {
       <DocHead />
       <div className={styles.container}>
         <main className={styles.main}>
-          <h1 className={styles.title}>Inbox</h1>
+          <h1 className={styles.title}>Messenger</h1>
 
           <Inbox />
         </main>
