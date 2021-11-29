@@ -1,11 +1,19 @@
-import FeatherIcon from 'feather-icons-react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import { Collapse, Container, Dropdown, Form, InputGroup, Nav, Navbar } from 'react-bootstrap';
-import { Avatar, Icon } from '../components';
-import { nav as data } from '../data';
-import { ModalNotifications, ModalSearch } from '../modals';
+import FeatherIcon from "feather-icons-react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import {
+  Collapse,
+  Container,
+  Dropdown,
+  Form,
+  InputGroup,
+  Nav,
+  Navbar,
+} from "react-bootstrap";
+import { Avatar, Icon } from "../components";
+import { nav as data } from "../data";
+import { ModalNotifications, ModalSearch } from "../modals";
 
 export default function Sidenav({ ...props }) {
   const router = useRouter();
@@ -17,7 +25,8 @@ export default function Sidenav({ ...props }) {
   });
 
   const [modalSearchVisible, setModalSearchVisible] = useState(false);
-  const [modalNotificationsVisible, setModalNotificationsVisible] = useState(false);
+  const [modalNotificationsVisible, setModalNotificationsVisible] =
+    useState(false);
 
   function isExpanded(itemId) {
     if (activeItemId === itemId) {
@@ -77,19 +86,26 @@ export default function Sidenav({ ...props }) {
                 <FeatherIcon
                   icon="chevron-down"
                   size="1em"
-                  className={`ms-auto nav-chevron ${isExpanded(id) && 'active'}`}
+                  className={`ms-auto nav-chevron ${
+                    isExpanded(id) && "active"
+                  }`}
                   {...props}
                 />
               </Nav.Link>
               <Collapse in={isExpanded(id)}>
                 <div>
-                  <div className="nav nav-sm flex-column">{getSubitems(item.children, id, arr)}</div>
+                  <div className="nav nav-sm flex-column">
+                    {getSubitems(item.children, id, arr)}
+                  </div>
                 </div>
               </Collapse>
             </>
           ) : (
             <Link href={item.url} passHref>
-              <Nav.Link active={router.pathname === item.url} onClick={() => handleClick(id, parentId)}>
+              <Nav.Link
+                active={router.pathname === item.url}
+                onClick={() => handleClick(id, parentId)}
+              >
                 {item.icon && <FeatherIcon icon={item.icon} size="17" />}
                 {item.title}
               </Nav.Link>
@@ -113,7 +129,7 @@ export default function Sidenav({ ...props }) {
   const brand = (
     <Link href="/" passHref>
       <Navbar.Brand>
-        <img className="navbar-brand-img" src="/img/logo.svg" alt="..." />
+        <img className="navbar-brand-img" src="/logo/logo.svg" alt="Logo" />
       </Navbar.Brand>
     </Link>
   );
@@ -121,7 +137,11 @@ export default function Sidenav({ ...props }) {
   const user = (
     <Dropdown align="end" className="d-md-none">
       <Dropdown.Toggle as={Avatar} size="sm" status="online" role="button">
-        <Avatar.Image className="rounded-circle" src="/img/avatars/profiles/avatar-1.jpg" alt="..." />
+        <Avatar.Image
+          className="rounded-circle"
+          src="/img/avatars/profiles/avatar-1.jpg"
+          alt="..."
+        />
       </Dropdown.Toggle>
       <Dropdown.Menu>
         <Link href="/profile-posts" passHref>
@@ -151,14 +171,22 @@ export default function Sidenav({ ...props }) {
 
   const footer = (
     <div className="navbar-user d-none d-md-flex">
-      <a className="navbar-user-link" role="button" onClick={() => setModalNotificationsVisible(true)}>
+      <a
+        className="navbar-user-link"
+        role="button"
+        onClick={() => setModalNotificationsVisible(true)}
+      >
         <Icon>
           <FeatherIcon icon="bell" size="17" />
         </Icon>
       </a>
       <Dropdown drop="up">
         <Dropdown.Toggle as={Avatar} size="sm" status="online" role="button">
-          <Avatar.Image className="rounded-circle" src="/img/avatars/profiles/avatar-1.jpg" alt="..." />
+          <Avatar.Image
+            className="rounded-circle"
+            src="/img/avatars/profiles/avatar-1.jpg"
+            alt="..."
+          />
         </Dropdown.Toggle>
         <Dropdown.Menu>
           <Link href="/profile-posts" passHref>
@@ -173,7 +201,11 @@ export default function Sidenav({ ...props }) {
           </Link>
         </Dropdown.Menu>
       </Dropdown>
-      <a className="navbar-user-link" role="button" onClick={() => setModalSearchVisible(true)}>
+      <a
+        className="navbar-user-link"
+        role="button"
+        onClick={() => setModalSearchVisible(true)}
+      >
         <Icon>
           <FeatherIcon icon="search" size="17" />
         </Icon>
@@ -192,7 +224,12 @@ export default function Sidenav({ ...props }) {
 
   return (
     <>
-      <Navbar expand="md" className="navbar-vertical fixed-start" collapseOnSelect={true} {...props}>
+      <Navbar
+        expand="md"
+        className="navbar-vertical fixed-start"
+        collapseOnSelect={true}
+        {...props}
+      >
         <Container fluid>
           {toggler}
           {brand}
@@ -200,8 +237,14 @@ export default function Sidenav({ ...props }) {
           {collapse}
         </Container>
       </Navbar>
-      <ModalSearch visible={modalSearchVisible} onDismiss={() => setModalSearchVisible(false)} />
-      <ModalNotifications visible={modalNotificationsVisible} onDismiss={() => setModalNotificationsVisible(false)} />
+      <ModalSearch
+        visible={modalSearchVisible}
+        onDismiss={() => setModalSearchVisible(false)}
+      />
+      <ModalNotifications
+        visible={modalNotificationsVisible}
+        onDismiss={() => setModalNotificationsVisible(false)}
+      />
     </>
   );
 }

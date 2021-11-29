@@ -1,11 +1,13 @@
-import "../styles/theme.scss";
-import { Provider } from "../frontend/gql/provider";
-
+import * as React from "react";
+import type { AppProps } from "next/app";
 import { SSRProvider } from "react-bootstrap";
 import { useRouter } from "next/router";
+
+import "../styles/theme.scss";
+import { Provider } from "../frontend/gql/provider";
 import { Sidenav } from "../components";
 
-const Messenger = ({ Component, pageProps }) => {
+const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
   const authPages = [
     "/error-illustration",
@@ -34,4 +36,4 @@ const Messenger = ({ Component, pageProps }) => {
   );
 };
 
-export default Messenger;
+export default App;
