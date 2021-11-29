@@ -1,4 +1,4 @@
-import styles from "./index/styles.module.css";
+import styles from "../styles/home.module.css";
 
 import { DocHead } from "../frontend/components/common/doc/head";
 import { Inbox } from "../frontend/components/inbox";
