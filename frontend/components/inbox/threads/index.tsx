@@ -12,17 +12,23 @@ const Threads: React.FC = () => {
 
   const threads = [1, 2, 3, 5, 6, 7, 8, 9, 10];
 
-  return threads.map((thread) => {
-    return (
-      <div className={styles.thread}>
-        Sender
-        <br />
-        Lorem Ipsum Set Dolor
-        <br />
-        10 min ago
-      </div>
-    );
-  });
+  const renderThreads = () => {
+    const renderThread = (thread: any) => {
+      return (
+        <div key={`thread-${thread}`} className={styles.thread}>
+          Sender
+          <br />
+          Lorem Ipsum Set Dolor
+          <br />
+          10 min ago
+        </div>
+      );
+    };
+
+    return threads.map((thread) => renderThread(thread));
+  };
+
+  return <div className={styles.threads}>{renderThreads()}</div>;
 };
 
 export { Threads };

@@ -1,4 +1,5 @@
-import { pluck, times, without } from "lodash";
+// import { times, without } from "lodash";
+import { times, without } from "underscore";
 
 interface Options {
   senderId: number;
@@ -37,7 +38,9 @@ const generateThreads = (options: Options = defaultOptions) => {
   // options
   // const { senderId } = options;
 
-  const recipients = selectRecipients();
+  console.log({ options, recipients: selectRecipients() });
+
+  // const recipients = selectRecipients();
 };
 
 // create a thread - insert_threads_one

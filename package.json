@@ -32,7 +32,8 @@
     "react-bootstrap": "^2.0.2",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.20.4",
-    "sass": "^1.43.5"
+    "sass": "^1.43.5",
+    "underscore": "^1.13.1"
   },
   "devDependencies": {
     "@graphql-codegen/add": "^3.0.0",
@@ -49,6 +50,7 @@
     "@types/lodash": "^4.14.177",
     "@types/node": "^16.11.10",
     "@types/react": "^17.0.37",
+    "@types/underscore": "^1.11.3",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.4",
     "husky": "^7.0.4",
