@@ -25,7 +25,7 @@
     "change-case": "^4.1.2",
     "chart.js": "^3.6.0",
     "classnames": "^2.3.1",
-    "date-fns": "^2.26.0",
+    "date-fns": "^2.27.0",
     "faker": "^5.5.3",
     "feather-icons-react": "^0.5.0",
     "graphql": "^16.0.1",
