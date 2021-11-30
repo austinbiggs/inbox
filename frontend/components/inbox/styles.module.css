@@ -2,6 +2,10 @@
 
 }
 
+.inbox {
+  width: 100%;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
