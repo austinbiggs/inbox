@@ -48,7 +48,7 @@
     "react-select": "^5.2.1",
     "react-table": "^7.7.0",
     "react-textarea-autosize": "^8.3.3",
-    "sass": "^1.43.5",
+    "sass": "^1.44.0",
     "underscore": "^1.13.1"
   },
   "devDependencies": {
