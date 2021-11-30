@@ -12,6 +12,17 @@ const Threads: React.FC = () => {
   console.log({ data, error, loading });
 
   const threads = [1, 2, 3, 5, 6, 7, 8, 9, 10];
+  const threadsAsString = `${threads}`
+
+  const messagesEndRef = React.useRef<HTMLDivElement | null>(null)
+  
+  const scrollToBottomOfMessages = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  React.useEffect(() => {
+    scrollToBottomOfMessages()
+  }, [threadsAsString])
 
   const renderThreads = () => {
     const renderThread = (thread: number) => {
@@ -29,6 +40,7 @@ const Threads: React.FC = () => {
           <div className={styles['message-container']}>
             <p className={classNames(styles.message, sentOrReceived ? styles['sent-message'] : styles['received-message'])}>Lorem Ipsum Set Dolor</p>
           </div>
+          <div ref={messagesEndRef} />
         </div>
       );
     };
