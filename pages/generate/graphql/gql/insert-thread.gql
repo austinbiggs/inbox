@@ -1,0 +1,7 @@
+mutation InsertThread($senderId: Int!) {
+  insert_threads_one(object: {created_by: $senderId}) {
+    id
+    created_by
+    created_at
+  }
+}
