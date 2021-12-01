@@ -1,11 +1,10 @@
 export type Props = {
-  // action: () => any;
-  messages: Message[];
+  // messages?: Message[];
 };
 
 export type Message = {
+  data?: object;
   emoji: string;
-  body: string;
   title?: string;
   time?: string;
 };

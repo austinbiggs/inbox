@@ -1,0 +1,11 @@
+.toasts {
+  margin: 20px;
+
+  .toast {
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    margin-bottom: 15px;
+  }
+}

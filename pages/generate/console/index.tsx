@@ -1,27 +1,39 @@
 import * as React from "react";
 import { Col, Container, Row, Toast } from "react-bootstrap";
 import { Message, Props } from "./types";
+import { makeVar, useReactiveVar } from "@apollo/client";
+import styles from "./styles.module.scss";
 
-export const Console: React.FC<Props> = (props: Props) => {
-  const { messages = [] } = props;
+export const messagesVar = makeVar<Message[]>([]);
+
+export const Console: React.FC<Props> = () => {
+  const messages = useReactiveVar(messagesVar);
 
   const renderMessage = (message: Message) => {
-    const { body, emoji, time = null, title = "" } = message;
+    const { data, emoji, title = "" } = message;
 
     return (
-      <Toast>
+      <Toast className={styles.toast}>
         <Toast.Header>
-          <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
           <strong className="me-auto">{`${emoji} ${title}`}</strong>
-          <small>{time}</small>
         </Toast.Header>
-        <Toast.Body>{body}</Toast.Body>
+        <Toast.Body>
+          <pre>{JSON.stringify(data, null, 4)}</pre>
+        </Toast.Body>
       </Toast>
     );
   };
 
   const renderMessages = () => {
-    return messages.map((message) => renderMessage(message));
+    if (messages.length === 0) {
+      return;
+    }
+
+    console.log({ messages });
+
+    return messages.map((message) => {
+      return renderMessage(message);
+    });
   };
 
   return (
@@ -29,7 +41,7 @@ export const Console: React.FC<Props> = (props: Props) => {
       <Row>
         <Col></Col>
         <Col xs={4} sm={4} md={4} lg={4} xl={4}>
-          {renderMessages()}
+          <div className={styles.toasts}>{renderMessages()}</div>
         </Col>
         <Col></Col>
       </Row>

@@ -1,17 +1,17 @@
 import * as React from "react";
 import { contains, random, times, without } from "underscore";
 
-import { Console } from "./console";
+import { Console, messagesVar } from "./console";
+import { Message } from "./console/types";
 
 const userIds = [3, 4, 5, 8, 9, 10, 11, 12, 13, 14];
 
 const GenerateThreads: React.FC = () => {
-  // state
-  const [messages, setMessages] = React.useState([]);
-
   // actions
-  const addMessage = (message: string, data?: any) => {
-    setMessages([...messages, { message, data }]);
+  const addMessage = (message: Message) => {
+    // console.log("addMessage", [...messages(), message]);
+
+    messagesVar([...messagesVar(), message]);
   };
 
   // handlers
@@ -24,11 +24,11 @@ const GenerateThreads: React.FC = () => {
       const senderIdKey = random(0, userIds.length - 1);
       senderId = userIds[senderIdKey];
 
-      addMessage("🌀 Random Sender", senderId);
+      addMessage({ emoji: "🌀", title: "Random Sender", data: { senderId } });
     } else {
       senderId = 3; // Charmander
 
-      addMessage("🔥 Default Sender", senderId);
+      addMessage({ emoji: "🔥", title: "Default Sender", data: { senderId } });
     }
 
     // min + max
@@ -38,12 +38,16 @@ const GenerateThreads: React.FC = () => {
     const possibleRecipients = without(userIds, senderId);
     const numberOfRecipients = random(minimumRecipients, maximumRecipients);
 
-    addMessage("🔍 Recipients Meta Data", {
-      min: minimumRecipients,
-      max: maximumRecipients,
-      numberOfRecipients,
-      possibleRecipients,
-    });
+    // addMessage({
+    //   emoji: "🔍",
+    //   title: "Recipients Meta Data",
+    //   data: {
+    //     min: minimumRecipients,
+    //     max: maximumRecipients,
+    //     numberOfRecipients,
+    //     possibleRecipients,
+    //   },
+    // });
 
     times(numberOfRecipients, () => {
       // select a random recipient from potential recipients
@@ -52,20 +56,23 @@ const GenerateThreads: React.FC = () => {
       );
 
       // randomly select a recipient
-      const recipientIdKey = random(0, possibleRecipients.length - 1);
-      const recipientId = possibleRecipients[recipientIdKey];
+      const recipientIdKey = random(0, availableRecipients.length - 1);
+      const recipientId = availableRecipients[recipientIdKey];
 
-      addMessage("🔍 Recipient Meta Data", {
-        availableRecipients,
-        recipientIdKey,
-        recipientId,
-        recipients,
-      });
+      // addMessage({
+      //   emoji: "🔍",
+      //   title: "Recipient Meta Data",
+      //   data: { availableRecipients, recipientIdKey, recipientId, recipients },
+      // });
 
       recipients.push(recipientId);
     });
 
-    addMessage("📨 Selected Recipients", recipients);
+    addMessage({
+      emoji: "📨",
+      title: "Selected Recipients",
+      data: { recipients },
+    });
 
     return {
       senderId,
@@ -74,12 +81,15 @@ const GenerateThreads: React.FC = () => {
   };
 
   const generateThread = () => {
-    addMessage("🏁 Generating Thread");
+    addMessage({
+      emoji: "🏁",
+      title: "Generating Thread",
+    });
 
     const { recipients, senderId } = selectRecipients();
 
     // create a thread - insert_threads_one
-    const [] = null;
+    // const [] = null;
 
     // select recipients
     // create thread_users records for each recipient - insert_threads_users
@@ -94,7 +104,7 @@ const GenerateThreads: React.FC = () => {
   }, []);
 
   // render
-  return <Console messages={messages} />;
+  return <Console />;
 };
 
 // generateThread();
