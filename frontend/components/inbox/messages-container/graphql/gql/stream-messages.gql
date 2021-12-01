@@ -4,5 +4,6 @@ subscription StreamMessages($threadId: Int!) {
     status
     created_at
     created_by
+    id
   }
 }

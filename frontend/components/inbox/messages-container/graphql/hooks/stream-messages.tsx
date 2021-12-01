@@ -18,6 +18,7 @@ export type StreamMessagesSubscription = {
     status: string;
     created_at: any;
     created_by: number;
+    id: any;
   }>;
 };
 
@@ -31,6 +32,7 @@ export const StreamMessagesDocument = gql`
       status
       created_at
       created_by
+      id
     }
   }
 `;

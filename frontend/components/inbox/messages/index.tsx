@@ -26,7 +26,7 @@ const Messages = ({ messages }: Props): JSX.Element => {
           id={message.id}
           message={message.message}
           timestamp={message.timestamp}
-          userId={message.userId}
+          user={message.user}
           key={`message-${message.id}`}
         />
       ))}
