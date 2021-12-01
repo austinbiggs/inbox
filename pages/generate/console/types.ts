@@ -4,4 +4,5 @@ export type Message = {
   title?: string;
   time?: string;
   uuid?: string;
+  variant?: string;
 };

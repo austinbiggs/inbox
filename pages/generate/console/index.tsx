@@ -6,8 +6,19 @@ import styles from "./styles.module.scss";
 
 export const messagesVar = makeVar<Message[]>([]);
 
-export const Console: React.FC<Props> = () => {
+export const Console: React.FC = () => {
   const messages = useReactiveVar(messagesVar);
+  const messagesLength = messages.length;
+
+  const messagesEndRef = React.useRef<HTMLDivElement | null>(null);
+
+  const scrollToBottomOfMessages = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  React.useEffect(() => {
+    scrollToBottomOfMessages();
+  }, [messagesLength]);
 
   const handleClose = (uuid: Message["uuid"]) => {
     const updatedMessages = messages.filter((message) => message.uuid !== uuid);
@@ -16,13 +27,14 @@ export const Console: React.FC<Props> = () => {
   };
 
   const renderMessage = (message: Message) => {
-    const { data, emoji, title = "", uuid } = message;
+    const { data, emoji, title = "", uuid, variant } = message;
 
     return (
       <Toast
         className={styles.toast}
         key={uuid}
         onClose={() => handleClose(uuid)}
+        bg={variant}
       >
         <Toast.Header>
           <strong className="me-auto">{`${emoji} ${title}`}</strong>
@@ -41,16 +53,21 @@ export const Console: React.FC<Props> = () => {
       return;
     }
 
-    return messages.map((message) => {
-      return renderMessage(message);
-    });
+    return (
+      <>
+        {messages.map((message) => {
+          return renderMessage(message);
+        })}
+        <div ref={messagesEndRef} />
+      </>
+    );
   };
 
   return (
     <Container>
       <Row>
         <Col></Col>
-        <Col xs={4} sm={4} md={4} lg={4} xl={4}>
+        <Col xs={4} sm={4} md={5} lg={6} xl={6}>
           <div className={styles.toasts}>{renderMessages()}</div>
         </Col>
         <Col></Col>

@@ -1,6 +1,6 @@
 documents:
   - './frontend/**/*.{gql,graphql}'
-  - './tasks/**/*.{gql,graphql}'
+  - './pages/**/*.{gql,graphql}'
 generates:
   gql/schema.json:
     plugins:

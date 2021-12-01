@@ -1,3 +1,5 @@
-import { generateThread } from "./threads.mjs";
+import GenerateThreads, { generateThread } from "./threads";
 
 setInterval(generateThread, 1000);
+
+export default GenerateThreads;
