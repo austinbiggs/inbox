@@ -1,5 +1,6 @@
 import * as React from "react";
 import { contains, random, times, without, uniqueId } from "underscore";
+import { add, formatISO } from "date-fns";
 
 import { Console, messagesVar } from "../console";
 import { Message } from "../console/types";
@@ -217,14 +218,16 @@ const GenerateThreads: React.FC = () => {
         createdBy = availableRecipients[recipientIdKey];
       }
 
-      message = { ...message, created_by: createdBy };
+      const createdAt = formatISO(add(new Date(), { minutes: index }));
+
+      message = { ...message, created_by: createdBy, created_at: createdAt };
 
       // uncomment for message sender details
-      // addMessage({
-      //   emoji: "🔍",
-      //   title: "Message Sender Meta Data",
-      //   data: { availableRecipients, recipientIdKey, message },
-      // });
+      addMessage({
+        emoji: "🔍",
+        title: "Message Sender Meta Data",
+        data: { availableRecipients, recipientIdKey, message },
+      });
 
       lastCreatedBy = createdBy;
       threadMessages.push(message);
