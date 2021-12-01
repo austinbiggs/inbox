@@ -1,0 +1,20 @@
+.inbox {
+  width: 100%;
+}
+
+.messages {
+  width: 50%;
+  height: 500px;
+  overflow: scroll;
+  margin: 0 auto;
+  background-color: white;
+  padding: 24px;
+  border-radius: 16px;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
