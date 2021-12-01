@@ -171,10 +171,10 @@ const GenerateThreads: React.FC = () => {
   const generateThreadMessages = (
     threadId: number,
     recipients: number[],
-    sender: number
+    senderId: number
   ) => {
     let threadMessages: Messages_Insert_Input[] = [];
-    let lastCreatedBy = null;
+    let lastCreatedBy: number = null;
 
     // randomly select some messages
     const numberOfMessages = random(2, 6);
@@ -188,19 +188,9 @@ const GenerateThreads: React.FC = () => {
       const messageKey = random(0, availableMessages.length - 1);
       let message: Messages_Insert_Input = {
         body: availableMessages[messageKey],
+        status: "sent",
         thread_id: threadId,
       };
-
-      // first message from thread sender
-      // remaining messages should go back and forth
-      let createdBy = null;
-      if (index === 0) {
-        createdBy = 3; // REPLACE WITH SENDER ID
-      } else {
-      }
-
-      message = { ...message, created_by: createdBy };
-      lastCreatedBy = createdBy;
 
       // uncomment for message details
       // addMessage({
@@ -209,12 +199,60 @@ const GenerateThreads: React.FC = () => {
       //   data: { availableMessages, messageKey, message, threadMessages },
       // });
 
+      // first message from thread sender
+      // remaining messages should be randomized
+      let createdBy = null;
+      let recipientIdKey = null;
+      let availableRecipients: number[] = [];
+      if (index === 0) {
+        createdBy = senderId;
+      } else {
+        // select a random recipient from potential recipients
+        availableRecipients = [...recipients, senderId].filter(
+          (id) => id !== lastCreatedBy
+        );
+
+        // randomly select a recipient
+        recipientIdKey = random(0, availableRecipients.length - 1);
+        createdBy = availableRecipients[recipientIdKey];
+      }
+
+      message = { ...message, created_by: createdBy };
+
+      // uncomment for message sender details
+      // addMessage({
+      //   emoji: "🔍",
+      //   title: "Message Sender Meta Data",
+      //   data: { availableRecipients, recipientIdKey, message },
+      // });
+
+      lastCreatedBy = createdBy;
       threadMessages.push(message);
     });
 
-    console.log({ numberOfMessages, threadMessages });
+    insertMessages({ variables: { messages: threadMessages } })
+      .then((result) => {
+        const threadMessagesResult = result?.data?.insert_messages;
 
-    // create 4-10 messages per thread
+        addMessage({
+          emoji: "✅",
+          title: "Thread Messages Created",
+          data: threadMessagesResult,
+          variant: "success",
+        });
+
+        // could add here to infinitely generate threads
+      })
+      .catch((error) => {
+        console.log(error);
+
+        addMessage({
+          emoji: "⚠️",
+          title: "Thread Messages not created!",
+          data: { error },
+          variant: "warning",
+        });
+      });
   };
 
   // hooks
@@ -225,14 +263,5 @@ const GenerateThreads: React.FC = () => {
   // render
   return <Console />;
 };
-
-// generateThread();
-
-// create a thread - insert_threads_one
-// select recipients
-// create thread_users records for each recipient - insert_threads_users
-// create 4-10 messages per thread
-// - first message must be from sender -
-// - rest of messages should go back and forth
 
 export default GenerateThreads;
