@@ -1,5 +1,5 @@
 import * as React from "react";
-import { contains, random, times, without } from "underscore";
+import { contains, random, times, without, uniqueId } from "underscore";
 
 import { Console, messagesVar } from "./console";
 import { Message } from "./console/types";
@@ -9,9 +9,7 @@ const userIds = [3, 4, 5, 8, 9, 10, 11, 12, 13, 14];
 const GenerateThreads: React.FC = () => {
   // actions
   const addMessage = (message: Message) => {
-    // console.log("addMessage", [...messages(), message]);
-
-    messagesVar([...messagesVar(), message]);
+    messagesVar([...messagesVar(), { ...message, uuid: uniqueId() }]);
   };
 
   // handlers
