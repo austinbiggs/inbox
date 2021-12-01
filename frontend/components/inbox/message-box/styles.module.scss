@@ -3,6 +3,7 @@
   align-items: center;
   width: 50%;
   margin: 24px auto 0;
+  position: relative;
 }
 
 .message-bar {
@@ -32,4 +33,16 @@
   border: none;
   align-items: center;
   justify-content: center;
+}
+
+.picker-button {
+  border: none;
+  border-radius: 50%;
+  color: unset;
+}
+
+.picker {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
 }

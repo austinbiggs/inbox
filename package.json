@@ -27,6 +27,7 @@
     "chart.js": "^3.6.0",
     "classnames": "^2.3.1",
     "date-fns": "^2.27.0",
+    "emoji-picker-react": "^3.4.8",
     "faker": "^5.5.3",
     "feather-icons-react": "^0.5.0",
     "graphql": "^16.0.1",

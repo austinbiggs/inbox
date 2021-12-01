@@ -2,6 +2,8 @@ import * as React from 'react';
 import styles from './styles.module.scss';
 import { Icon as FeatherIcon } from "ts-react-feather-icons";
 import { Unary } from "@perfective/common/function";
+import {IEmojiData} from 'emoji-picker-react'
+import dynamic from "next/dynamic";
 
 interface Props {
   updateMessages: Unary<string, void>;
@@ -10,8 +12,8 @@ interface Props {
 const MessageBox = ({ updateMessages }: Props): JSX.Element => {
   // TODO: (adam) Look into refactoring to use React Hook Form
   // For now, useState works just fine
-
   const [message, setMessage] = React.useState('')
+  const [showEmojiPicker, setShowEmojiPicker] = React.useState(false)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     console.log(event.target.value);
@@ -23,8 +25,21 @@ const MessageBox = ({ updateMessages }: Props): JSX.Element => {
     if (message) {
       updateMessages(message)
       setMessage('')
+      setShowEmojiPicker(false)
     }
   }
+
+  const handleEmojiClick = (_event: React.MouseEvent, emojiObject: IEmojiData) => {
+    console.log({emojiObject});
+    setMessage(`${message}${emojiObject.emoji}`)
+    setShowEmojiPicker(false)
+  }
+
+  const handlePickerOpenerClick = () => {
+    setShowEmojiPicker(!showEmojiPicker)
+  }
+
+  const Picker = dynamic(() => import('emoji-picker-react'), { ssr: false })
 
   return (
     <form 
@@ -32,7 +47,9 @@ const MessageBox = ({ updateMessages }: Props): JSX.Element => {
       className={styles['message-container']}
     >
       <div className={styles['message-bar']}>
-        <FeatherIcon name="smile" size={45} />
+        <button type="button" onClick={handlePickerOpenerClick} className={styles['picker-button']}>
+          <FeatherIcon name="smile" size={45} />
+        </button>
         <label htmlFor="message-input" className="visually-hidden">Type a message</label>
         <input 
           type="text" 
@@ -46,6 +63,11 @@ const MessageBox = ({ updateMessages }: Props): JSX.Element => {
       <button type="submit" className={styles['send-button']}>
         <FeatherIcon name="send" size={24} />
       </button>
+      {showEmojiPicker && (
+        <div className={styles.picker}>
+          <Picker onEmojiClick={handleEmojiClick} />
+        </div>
+      )}
     </form>
   );
 }
