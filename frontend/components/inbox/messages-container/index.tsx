@@ -8,6 +8,7 @@ import { useInsertMessageMutation } from './graphql/hooks/insert-message';
 import styles from './styles.module.scss';
 
 const MessagesContainer = (): JSX.Element => {
+  // TODO: clean up the code some here
   const { data, loading, error } = useGetMessagesQuery({
     variables: {
       threadId: 174 // hardcoded for now
@@ -26,7 +27,6 @@ const MessagesContainer = (): JSX.Element => {
       id: message.id,
       message: message.body,
       timestamp: message.created_at,
-      // userId: message.created_by,
       user: {
         id: message.created_by,
         avatar: message.user.image_url
