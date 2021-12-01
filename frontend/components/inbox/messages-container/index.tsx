@@ -8,14 +8,13 @@ import { useInsertMessageMutation } from './graphql/hooks/insert-message';
 import styles from './styles.module.scss';
 
 const MessagesContainer = (): JSX.Element => {
-  // TODO: clean up the code some here
-  const { data, loading, error } = useGetMessagesQuery({
+  const { data } = useGetMessagesQuery({
     variables: {
       threadId: 174 // hardcoded for now
     }
   })
 
-  const [insertMessageMutation, { data: mutationData, loading: mutationLoading, error: mutationError }] = useInsertMessageMutation({
+  const [insertMessageMutation, { data: mutationData }] = useInsertMessageMutation({
     refetchQueries: [
       'GetMessages'
     ]
@@ -39,7 +38,7 @@ const MessagesContainer = (): JSX.Element => {
       variables: {
         message: {
           body: newMessage,
-          created_by: 3,
+          created_by: 3, // hardcoded for now
           status: "sent",
           thread_id: 174, // hardcoded for now
         }
