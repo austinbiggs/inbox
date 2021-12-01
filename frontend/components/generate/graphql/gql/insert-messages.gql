@@ -1,0 +1,9 @@
+mutation InsertMessages($messages: [messages_insert_input!]!) {
+  insert_messages(objects: $messages) {
+    returning {
+      created_by
+      id
+      body
+    }
+  }
+}

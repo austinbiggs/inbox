@@ -1,0 +1,10 @@
+mutation InsertThreadUsers($threadUsers: [threads_users_insert_input!]!) {
+  insert_threads_users(objects: $threadUsers) {
+    __typename
+    returning {
+      id
+      created_at
+      user_id
+    }
+  }
+}
