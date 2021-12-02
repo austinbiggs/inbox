@@ -53,7 +53,7 @@ const MessagesContainer = ({ threadId }: Props): JSX.Element => {
     });
   };
 
-  console.log({ data });
+  // console.log({ data });
 
   return (
     <div className={classNames(styles.container, "shadow", "p-3")}>

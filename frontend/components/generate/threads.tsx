@@ -13,9 +13,16 @@ import { useInsertThreadUsersMutation } from "./graphql/hooks/insert-thread-user
 import { SEED_MESSAGES } from "./constants";
 import { useInsertMessagesMutation } from "./graphql/hooks/insert-messages";
 
+interface Props {
+  live?: boolean;
+}
+
 const userIds = [3, 4, 5, 8, 9, 10, 11, 12, 13, 14];
 
-const GenerateThreads: React.FC = () => {
+const GenerateThreads: React.FC<Props> = (props) => {
+  // props
+  const { live = false } = props;
+
   // hooks
   const [insertThread] = useInsertThreadMutation();
   const [insertThreadUsers] = useInsertThreadUsersMutation();
@@ -135,11 +142,12 @@ const GenerateThreads: React.FC = () => {
     recipients: number[],
     senderId: number
   ) => {
-    const threadUsers: Threads_Users_Insert_Input[] = recipients.map(
-      (recipient) => {
-        return { thread_id: threadId, user_id: recipient };
-      }
-    );
+    const threadUsers: Threads_Users_Insert_Input[] = [
+      senderId,
+      ...recipients,
+    ].map((recipient) => {
+      return { thread_id: threadId, user_id: recipient };
+    });
 
     // create thread_users records for each recipient - insert_threads_users
     insertThreadUsers({
@@ -245,6 +253,16 @@ const GenerateThreads: React.FC = () => {
         });
 
         // could add here to infinitely generate threads
+        if (live) {
+          addMessage({
+            emoji: "⌛",
+            title: "Waiting 2 seconds",
+          });
+
+          setTimeout(() => {
+            generateThread();
+          }, 2000);
+        }
       })
       .catch((error) => {
         console.log(error);

@@ -51,7 +51,7 @@ export const link = isBrowser
   ? split(
       ({ query }) => {
         const { kind, operation } = getMainDefinition(query);
-        console.log({ query }, { kind }, { operation });
+        // console.log({ query }, { kind }, { operation });
         return kind === "OperationDefinition" && operation === "subscription";
       },
       wsLink,
