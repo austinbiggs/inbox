@@ -9,7 +9,8 @@ const Inbox: React.FC = () => {
       <div className={styles.threads}>
         {/* <Threads /> */}
       </div>
-      <MessagesContainer />
+      {/* Hardcoded for now */}
+      <MessagesContainer threadId={174} />
     </div>
   );
 };

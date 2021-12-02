@@ -7,10 +7,16 @@ import { useGetMessagesQuery } from './graphql/hooks/get-messages';
 import { useInsertMessageMutation } from './graphql/hooks/insert-message';
 import styles from './styles.module.scss';
 
-const MessagesContainer = (): JSX.Element => {
+interface Props {
+  threadId: number;
+}
+
+const CURRENT_USER_ID = 3; // First user ID in the users table
+
+const MessagesContainer = ({ threadId }: Props): JSX.Element => {
   const { data } = useGetMessagesQuery({
     variables: {
-      threadId: 174 // hardcoded for now
+      threadId,
     }
   })
 
@@ -38,9 +44,9 @@ const MessagesContainer = (): JSX.Element => {
       variables: {
         message: {
           body: newMessage,
-          created_by: 3, // hardcoded for now
+          created_by: CURRENT_USER_ID, // hardcoded for now
           status: "sent",
-          thread_id: 174, // hardcoded for now
+          thread_id: threadId,
         }
       }
     }).then(res => {
