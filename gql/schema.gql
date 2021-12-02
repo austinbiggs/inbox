@@ -311,6 +311,18 @@ type messages_mutation_response {
 }
 
 """
+input type for inserting object relation for remote table "messages"
+"""
+input messages_obj_rel_insert_input {
+  data: messages_insert_input!
+
+  """
+  on conflict condition
+  """
+  on_conflict: messages_on_conflict
+}
+
+"""
 on conflict condition type for table "messages"
 """
 input messages_on_conflict {
@@ -1443,6 +1455,11 @@ type threads {
   id: Int!
 
   """
+  An object relationship
+  """
+  latest_message: messages
+
+  """
   An array relationship
   """
   messages(
@@ -1649,6 +1666,7 @@ input threads_bool_exp {
   created_at: timestamptz_comparison_exp
   created_by: Int_comparison_exp
   id: Int_comparison_exp
+  latest_message: messages_bool_exp
   messages: messages_bool_exp
   threads_users: threads_users_bool_exp
   updated_at: timestamptz_comparison_exp
@@ -1680,6 +1698,7 @@ input threads_insert_input {
   created_at: timestamptz
   created_by: Int
   id: Int
+  latest_message: messages_obj_rel_insert_input
   messages: messages_arr_rel_insert_input
   threads_users: threads_users_arr_rel_insert_input
   updated_at: timestamptz
@@ -1769,6 +1788,7 @@ input threads_order_by {
   created_at: order_by
   created_by: order_by
   id: order_by
+  latest_message: messages_order_by
   messages_aggregate: messages_aggregate_order_by
   threads_users_aggregate: threads_users_aggregate_order_by
   updated_at: order_by

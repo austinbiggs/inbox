@@ -245,6 +245,13 @@ export type Messages_Mutation_Response = {
   returning: Array<Messages>;
 };
 
+/** input type for inserting object relation for remote table "messages" */
+export type Messages_Obj_Rel_Insert_Input = {
+  data: Messages_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<Messages_On_Conflict>;
+};
+
 /** on conflict condition type for table "messages" */
 export type Messages_On_Conflict = {
   constraint: Messages_Constraint;
@@ -843,6 +850,8 @@ export type Threads = {
   created_at: Scalars["timestamptz"];
   created_by: Scalars["Int"];
   id: Scalars["Int"];
+  /** An object relationship */
+  latest_message?: Maybe<Messages>;
   /** An array relationship */
   messages: Array<Messages>;
   /** An aggregate relationship */
@@ -964,6 +973,7 @@ export type Threads_Bool_Exp = {
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   created_by?: InputMaybe<Int_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
+  latest_message?: InputMaybe<Messages_Bool_Exp>;
   messages?: InputMaybe<Messages_Bool_Exp>;
   threads_users?: InputMaybe<Threads_Users_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -987,6 +997,7 @@ export type Threads_Insert_Input = {
   created_at?: InputMaybe<Scalars["timestamptz"]>;
   created_by?: InputMaybe<Scalars["Int"]>;
   id?: InputMaybe<Scalars["Int"]>;
+  latest_message?: InputMaybe<Messages_Obj_Rel_Insert_Input>;
   messages?: InputMaybe<Messages_Arr_Rel_Insert_Input>;
   threads_users?: InputMaybe<Threads_Users_Arr_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars["timestamptz"]>;
@@ -1055,6 +1066,7 @@ export type Threads_Order_By = {
   created_at?: InputMaybe<Order_By>;
   created_by?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  latest_message?: InputMaybe<Messages_Order_By>;
   messages_aggregate?: InputMaybe<Messages_Aggregate_Order_By>;
   threads_users_aggregate?: InputMaybe<Threads_Users_Aggregate_Order_By>;
   updated_at?: InputMaybe<Order_By>;
