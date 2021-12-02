@@ -11,5 +11,5 @@ export interface ThreadData {
       image_url: string;
       name: string;
     }
-  }
+  }[]
 }
