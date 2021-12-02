@@ -300,6 +300,7 @@ export type threadsKeySpecifier = (
   | "created_at"
   | "created_by"
   | "id"
+  | "latest_message"
   | "messages"
   | "messages_aggregate"
   | "threads_users"
@@ -312,6 +313,7 @@ export type threadsFieldPolicy = {
   created_at?: FieldPolicy<any> | FieldReadFunction<any>;
   created_by?: FieldPolicy<any> | FieldReadFunction<any>;
   id?: FieldPolicy<any> | FieldReadFunction<any>;
+  latest_message?: FieldPolicy<any> | FieldReadFunction<any>;
   messages?: FieldPolicy<any> | FieldReadFunction<any>;
   messages_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
   threads_users?: FieldPolicy<any> | FieldReadFunction<any>;

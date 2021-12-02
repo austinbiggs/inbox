@@ -3,8 +3,14 @@ import * as React from "react";
 import styles from "./styles.module.scss";
 import { useGetThreadsQuery } from "./graphql/hooks/get_threads";
 import classNames from "classnames";
+import { ThreadData } from "../types";
 
-const Threads: React.FC = () => {
+interface Props {
+  threadData: ThreadData;
+}
+
+const Threads = ({ threadData }: Props): JSX.Element => {
+  console.log('Threads: ', { threadData });
   const { data, error, loading } = useGetThreadsQuery({
     variables: { userId: 3 },
   });
