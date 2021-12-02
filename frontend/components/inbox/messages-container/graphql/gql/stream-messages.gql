@@ -1,0 +1,12 @@
+subscription StreamMessages($threadId: Int!) {
+  messages(order_by: {created_at: asc}, where: {thread_id: {_eq: $threadId}}) {
+    body
+    status
+    created_at
+    created_by
+    id
+    user {
+      image_url
+    }
+  }
+}

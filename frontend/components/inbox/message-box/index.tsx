@@ -1,9 +1,9 @@
-import * as React from 'react';
-import styles from './styles.module.scss';
-import { Icon as FeatherIcon } from "ts-react-feather-icons";
 import { Unary } from "@perfective/common/function";
-import {IEmojiData} from 'emoji-picker-react'
+import { IEmojiData } from 'emoji-picker-react';
 import dynamic from "next/dynamic";
+import * as React from 'react';
+import { Icon as FeatherIcon } from "ts-react-feather-icons";
+import styles from './styles.module.scss';
 
 interface Props {
   updateMessages: Unary<string, void>;
@@ -16,16 +16,15 @@ const MessageBox = ({ updateMessages }: Props): JSX.Element => {
   const [showEmojiPicker, setShowEmojiPicker] = React.useState(false)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log(event.target.value);
     setMessage(event.target.value)
   }
 
   const handleSubmit = (event: React.ChangeEvent<HTMLFormElement>): void => {
     event.preventDefault()
     if (message) {
-      updateMessages(message)
       setMessage('')
       setShowEmojiPicker(false)
+      updateMessages(message)
     }
   }
 

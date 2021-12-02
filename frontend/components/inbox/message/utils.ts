@@ -1,5 +1,5 @@
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 
-export function formattedTimeFromTimestamp(timestamp: number): string {
-  return format(timestamp, 'hh:mm a')
+export function formattedTimeFromTimestamp(timestamp: string): string {
+  return format(parseISO(timestamp), 'hh:mm a')
 }

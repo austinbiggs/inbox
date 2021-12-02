@@ -5,6 +5,9 @@ const defaults = {
   sassOptions: {
     includePaths: ["frontend/styles"],
   },
+  images: {
+    domains: ['img.pokemondb.net']
+  }
 };
 
 const configs = {

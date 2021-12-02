@@ -4,37 +4,29 @@ import { Message as MessageData } from "../messages/types";
 
 import styles from "./styles.module.scss";
 import { formattedTimeFromTimestamp } from './utils';
+import Image from "next/image";
 
-const CURRENT_USER_ID = 1;
+const CURRENT_USER_ID = 3; // First user ID in the users table
 
 const Message = ({
-  // id,
   message,
   timestamp,
-  userId
+  user
 }: MessageData): JSX.Element => {
-  // const threads = [1, 2, 3, 5, 6, 7, 8, 9, 10];
-
-  // const renderMessages = () => {
-  //   const renderMessage = (message: any) => {
-  //     return (
-  //       <div key={`message-${message}`} className={styles.message}>
-  //         Lorem Ipsum Set Dolor Amet
-  //       </div>
-  //     );
-  //   };
-
-  //   return threads.map((message) => renderMessage(message));
-  // };
-
-  // return <div className={styles.messages}>{renderMessages()}</div>;
-  const sentOrReceived = userId === CURRENT_USER_ID;
+  const sentOrReceived = user.id === CURRENT_USER_ID;
 
   // TODO: (adam) Rename some of these classes. They don't really make sense anymore
   return (
     <div className={classNames(styles.thread, sentOrReceived ? styles['thread-sent'] : '')}>
       <div className={classNames(styles['avatar-container'], sentOrReceived ? styles['avatar-container-sent'] : '')}>
-        <img src={`https://loremflickr.com/50/50?random=${userId}`} alt="avatar" className={styles.avatar} />
+        <Image
+          src={user.avatar}
+          alt="Avatar"
+          className={styles.avatar}
+          width={50}
+          height={50}
+          priority
+        />
         {/* For some reason the Avatar component isn't behaving. Look into this later */}
         {/* <Avatar >
           <Avatar.Image src={`https://loremflickr.com/50/50?random=${thread % 2}`} alt="avatar" className={styles.avatar} />

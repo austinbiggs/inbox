@@ -18,19 +18,25 @@ export type StreamMessagesSubscription = {
     status: string;
     created_at: any;
     created_by: number;
+    id: any;
+    user: { __typename?: "users"; image_url?: string | null | undefined };
   }>;
 };
 
 export const StreamMessagesDocument = gql`
   subscription StreamMessages($threadId: Int!) {
     messages(
-      order_by: { created_at: desc }
+      order_by: { created_at: asc }
       where: { thread_id: { _eq: $threadId } }
     ) {
       body
       status
       created_at
       created_by
+      id
+      user {
+        image_url
+      }
     }
   }
 `;
