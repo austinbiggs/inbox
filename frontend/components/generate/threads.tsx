@@ -252,16 +252,16 @@ const GenerateThreads: React.FC<Props> = (props) => {
           variant: "success",
         });
 
-        // could add here to infinitely generate threads
+        // infinitely generate threads every X seconds
         if (live) {
           addMessage({
             emoji: "⌛",
-            title: "Waiting 2 seconds",
+            title: "Waiting 10 seconds",
           });
 
           setTimeout(() => {
             generateThread();
-          }, 2000);
+          }, 10000);
         }
       })
       .catch((error) => {

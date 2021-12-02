@@ -9,12 +9,11 @@ const Threads: React.FC = () => {
     variables: { userId: 3 },
   });
 
-  console.log({ data, error, loading });
-
-  const threads = [1, 2, 3, 5, 6, 7, 8, 9, 10];
+  const threads = data?.threads || [];
   const threadsLength = threads.length;
-
   const threadsTopRef = React.useRef<HTMLDivElement | null>(null);
+
+  console.log({ threads, error, loading });
 
   const scrollToTopOfThreads = () => {
     threadsTopRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -29,7 +28,7 @@ const Threads: React.FC = () => {
       <div
         key={`thread-${thread}`}
         className={styles.thread}
-      >{`Thread ${thread}`}</div>
+      >{`Thread ${thread.id}`}</div>
     );
   };
 

@@ -25,7 +25,6 @@ export type StreamThreadsSubscription = {
       __typename?: "threads_users";
       user: {
         __typename?: "users";
-        id: number;
         image_url?: string | null | undefined;
         name: string;
       };
@@ -35,7 +34,10 @@ export type StreamThreadsSubscription = {
 
 export const StreamThreadsDocument = gql`
   subscription StreamThreads($userId: Int!) {
-    threads(where: { threads_users: { user_id: { _eq: $userId } } }) {
+    threads(
+      where: { threads_users: { user_id: { _eq: $userId } } }
+      limit: 25
+    ) {
       id
       messages(
         limit: 1
@@ -48,7 +50,6 @@ export const StreamThreadsDocument = gql`
       }
       threads_users {
         user {
-          id
           image_url
           name
         }
