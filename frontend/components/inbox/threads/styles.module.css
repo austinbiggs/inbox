@@ -19,8 +19,7 @@
 }
 
 .threads {
-  width: 50%;
-  height: 500px;
+  height: 50vh;
   overflow: scroll;
   margin: 0 auto;
   background-color: white;

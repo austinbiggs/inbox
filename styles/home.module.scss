@@ -1,0 +1,19 @@
+.container {
+  padding-top: 40px;
+
+  .title {
+    text-align: center;
+    margin-bottom: 25px;
+
+    h1 {
+      margin-top: -14px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
