@@ -56,12 +56,12 @@ const MessagesContainer = ({ threadId }: Props): JSX.Element => {
   console.log({ data });
 
   return (
-    <>
-      <div className={classNames(styles.messages, "shadow", "p-3")}>
+    <div className={classNames(styles.container, "shadow", "p-3")}>
+      <div className={styles.messages}>
         {messages && <Messages messages={messages} />}
       </div>
       <MessageBox updateMessages={updateMessages} />
-    </>
+    </div>
   );
 };
 
