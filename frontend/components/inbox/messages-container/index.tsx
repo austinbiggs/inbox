@@ -3,8 +3,8 @@ import * as React from 'react';
 import { MessageBox } from '../message-box';
 import { Messages } from '../messages';
 import { Message } from '../messages/types';
-import { useGetMessagesQuery } from './graphql/hooks/get-messages';
 import { useInsertMessageMutation } from './graphql/hooks/insert-message';
+import { useStreamMessagesSubscription } from './graphql/hooks/stream-messages';
 import styles from './styles.module.scss';
 
 interface Props {
@@ -14,17 +14,13 @@ interface Props {
 const CURRENT_USER_ID = 3; // First user ID in the users table
 
 const MessagesContainer = ({ threadId }: Props): JSX.Element => {
-  const { data } = useGetMessagesQuery({
+  const { data } = useStreamMessagesSubscription({
     variables: {
       threadId,
     }
   })
 
-  const [insertMessageMutation, { data: mutationData }] = useInsertMessageMutation({
-    refetchQueries: [
-      'GetMessages'
-    ]
-  })
+  const [insertMessageMutation] = useInsertMessageMutation()
 
   const messages = maybe(data)
     .pick("messages")
@@ -50,9 +46,11 @@ const MessagesContainer = ({ threadId }: Props): JSX.Element => {
         }
       }
     }).then(res => {
-      console.log({res}, {mutationData}, {data});
+      console.log({res}, {data});
     })
   }
+
+  console.log({data});
   
   return (
     <>
