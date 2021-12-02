@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
 import { useGetThreadsQuery } from "./graphql/hooks/get_threads";
 import classNames from "classnames";
 
@@ -40,7 +40,7 @@ const Threads: React.FC = () => {
   return (
     <div className={classNames(styles.threads, "shadow", "p-3")}>
       <div ref={threadsTopRef} />
-      {renderThreads()}
+      <div className={styles.list}>{renderThreads()}</div>
     </div>
   );
 };
