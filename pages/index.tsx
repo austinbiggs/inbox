@@ -5,8 +5,17 @@ import { Inbox } from "../frontend/components/inbox";
 import { Col, Container, Row } from "react-bootstrap";
 import Image from "next/image";
 import * as React from "react";
+import { GetServerSideProps } from "next";
+import { gql } from "@apollo/client";
+import { client } from '../frontend/gql/client/index';
+import { ThreadData } from "components/inbox/types";
 
-const Home = () => {
+interface Props {
+  threadData: ThreadData;
+}
+
+const Home = ({ threadData }: Props) => {
+  console.log({threads: threadData}, 'index.tsx');
   return (
     <>
       <DocHead />
@@ -27,7 +36,7 @@ const Home = () => {
               <h1>Messenger</h1>
             </div>
 
-            <Inbox />
+            <Inbox threadData={threadData} />
           </Col>
           <Col></Col>
         </Row>
@@ -42,5 +51,35 @@ const Home = () => {
     </>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { data } = await client.query({
+    query: gql`
+      query GetThreads {
+        threads {
+          created_by
+          id
+          messages {
+            body
+            created_at
+            created_by
+            id
+            user {
+              id
+              image_url
+              name
+            }
+          }
+        }
+      }
+    `
+  })
+
+  return {
+    props: {
+      threadData: data.threads
+    } as Props
+  }
+}
 
 export default Home;
