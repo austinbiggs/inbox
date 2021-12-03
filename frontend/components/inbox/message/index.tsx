@@ -9,7 +9,9 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const CURRENT_USER_ID = 3; // First user ID in the users table
 
-const Message = ({ message, timestamp, user }: MessageData): JSX.Element => {
+type Props = Omit<MessageData, "threadId">;
+
+const Message = ({ message, timestamp, user }: Props): JSX.Element => {
   const sentOrReceived = user.id === CURRENT_USER_ID;
 
   // TODO: (adam) Rename some of these classes. They don't really make sense anymore

@@ -5,6 +5,7 @@ subscription StreamMessages($threadId: Int!) {
     created_at
     created_by
     id
+    thread_id
     user {
       id
       image_url
