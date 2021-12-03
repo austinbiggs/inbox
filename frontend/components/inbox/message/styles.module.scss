@@ -20,6 +20,12 @@
 
   &.charmander {
     background-color: rgba(232, 140, 74, 0.4);
+
+    .image {
+      width: 130%;
+      height: 130%;
+      margin: -15%;
+    }
   }
 
   &.squirtle {
