@@ -6,7 +6,6 @@ import Avatar from "../../../../components/Avatar";
 import { selectedThreadVar } from "../index";
 import { formattedTimeFromTimestamp } from "../message/utils";
 import { ThreadData } from "../types";
-import { useGetThreadsQuery } from "./graphql/hooks/get_threads";
 import styles from "./styles.module.scss";
 import { useStreamThreadsSubscription } from "./graphql/hooks/stream_threads";
 
