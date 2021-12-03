@@ -102,6 +102,7 @@ const Threads = ({
     return (
       <div
         key={`thread-${thread?.id}`}
+        data-hook={`thread-${thread?.id}`}
         className={classNames(styles.thread, selected && styles.selected)}
         onClick={() => handleSelect(thread)}
       >
