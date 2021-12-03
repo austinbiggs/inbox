@@ -62,6 +62,13 @@ export const getServerSideProps: GetServerSideProps = async () => {
               name
             }
           }
+          threads_users {
+            user {
+              id
+              gif_url
+              name
+            }
+          }
         }
       }
     `,

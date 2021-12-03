@@ -18,7 +18,7 @@ const MessagesContainer = (): JSX.Element => {
 
   const { data, loading } = useStreamMessagesSubscription({
     variables: {
-      threadId: selectedThread?.toString(),
+      threadId: selectedThread,
     },
   });
 
@@ -82,7 +82,7 @@ const MessagesContainer = (): JSX.Element => {
           body: newMessage,
           created_by: CURRENT_USER_ID, // hardcoded for now
           status: "sent",
-          thread_id: selectedThread?.toString(),
+          thread_id: selectedThread,
           id: messageId,
         },
       },
