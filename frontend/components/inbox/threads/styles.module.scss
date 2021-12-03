@@ -37,6 +37,11 @@
       flex-direction: row;
       justify-content: flex-start;
       align-items: center;
+      padding: 10px;
+
+      &.selected {
+        color: blue;
+      }
     }
   }
 }

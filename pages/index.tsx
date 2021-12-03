@@ -7,15 +7,14 @@ import Image from "next/image";
 import * as React from "react";
 import { GetServerSideProps } from "next";
 import { gql } from "@apollo/client";
-import { client } from '../frontend/gql/client/index';
+import { client } from "../frontend/gql/client/index";
 import { ThreadData } from "components/inbox/types";
 
 interface Props {
-  threadData: ThreadData;
+  threadData: ThreadData[];
 }
 
 const Home = ({ threadData }: Props) => {
-  console.log({threads: threadData}, 'index.tsx');
   return (
     <>
       <DocHead />
@@ -41,13 +40,6 @@ const Home = ({ threadData }: Props) => {
           <Col></Col>
         </Row>
       </Container>
-      {/*<div className={styles.container}>*/}
-      {/*  <main className={styles.main}>*/}
-      {/*    <h1 className={styles.title}>Messenger</h1>*/}
-
-      {/*    <Inbox />*/}
-      {/*  </main>*/}
-      {/*</div>*/}
     </>
   );
 };
@@ -72,14 +64,14 @@ export const getServerSideProps: GetServerSideProps = async () => {
           }
         }
       }
-    `
-  })
+    `,
+  });
 
   return {
     props: {
-      threadData: data.threads
-    } as Props
-  }
-}
+      threadData: data.threads,
+    } as Props,
+  };
+};
 
 export default Home;

@@ -5,10 +5,13 @@ import { MessagesContainer } from "./messages-container";
 import { Threads } from "./threads";
 import styles from "./styles.module.scss";
 import { ThreadData } from "./types";
+import { makeVar } from "@apollo/client";
 
 interface Props {
-  threadData: ThreadData;
+  threadData: ThreadData[];
 }
+
+export const selectedThreadVar = makeVar<string>(null);
 
 const Inbox = ({ threadData }: Props): JSX.Element => {
   return (
