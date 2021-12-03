@@ -34,12 +34,13 @@ const MessagesContainer = (): JSX.Element => {
     .pick("messages")
     .to((messages) =>
       messages.map<Message>((message) => ({
-        id: message.id,
-        message: message.body,
-        timestamp: message.created_at,
+        id: message?.id,
+        message: message?.body,
+        timestamp: message?.created_at,
         user: {
-          id: message.created_by,
-          avatar: message.user.image_url,
+          id: message?.created_by,
+          avatar: message?.user?.image_url,
+          name: message?.user?.name,
         },
       }))
     )
