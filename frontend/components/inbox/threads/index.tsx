@@ -71,8 +71,6 @@ const Threads = ({
       (threadUser) => threadUser?.user?.id !== CURRENT_USER_ID
     );
 
-    console.log({ thread, threadUsers });
-
     const renderAvatars = () => {
       return threadUsers.map((threadUser) => {
         const user = threadUser?.user;
