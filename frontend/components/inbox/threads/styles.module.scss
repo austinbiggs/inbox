@@ -39,8 +39,12 @@ $handshake-blue: #1569e0;
       align-items: center;
       flex-flow: row wrap;
       padding: 10px;
-      border-bottom: 1px solid lightgray;
+      position: relative;
+      //border-bottom: 1px solid lightgray;
+      border-radius: 16px;
+      overflow: hidden;
       cursor: pointer;
+      width: calc(100% - 10px);
 
       .avatar-timestamp-wrapper {
         flex: 1 1 100%;
@@ -49,13 +53,27 @@ $handshake-blue: #1569e0;
         justify-content: space-between;
       }
 
-      &:last-of-type {
-        border-bottom: none;
+      //&:last-of-type {
+      //  border-bottom: none;
+      //}
+
+      &::after {
+        content: "";
+        height: 1px;
+        width: 100%;
+        background-color: rgba(228, 233, 240, 0.7);
+        position: absolute;
+        left: 0;
+        bottom: 0;
       }
 
       &.selected {
         background-color: rgba($handshake-blue, 0.3);
         border-radius: 16px;
+
+        //&::after {
+        //  display: none;
+        //}
       }
 
       .avatar {
