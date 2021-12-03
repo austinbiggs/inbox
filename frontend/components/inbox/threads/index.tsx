@@ -51,7 +51,7 @@ const Threads = ({
   const threadsLength = threads.length;
   const threadsTopRef = React.useRef<HTMLDivElement | null>(null);
 
-  console.log({ threads, freshThreads, prefetchedThreads });
+  // console.log({ threads, freshThreads, prefetchedThreads });
 
   const scrollToTopOfThreads = () => {
     threadsTopRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -62,7 +62,6 @@ const Threads = ({
   }, [threadsLength]);
 
   const handleSelect = (thread: FreshThread) => {
-    console.log('selected', thread.id);
     selectedThreadVar(thread?.id);
   };
 

@@ -22,7 +22,7 @@ const MessagesContainer = (): JSX.Element => {
     },
   });
 
-  console.log({selectedThread});
+  // console.log({selectedThread});
 
   const [insertMessageMutation] = useInsertMessageMutation();
 
@@ -59,11 +59,13 @@ const MessagesContainer = (): JSX.Element => {
     })
     .or(undefined);
 
-  console.log('messages', {messages}, {localMessages});
+  // console.log("messages", { messages }, { localMessages });
 
   if (
     (localMessages === undefined && messages !== undefined) ||
-    (messages !== undefined && (localMessages?.length < messages.length || messages[0].threadId !== localMessages?.[0].threadId))
+    (messages !== undefined &&
+      (localMessages?.length < messages.length ||
+        messages[0].threadId !== localMessages?.[0].threadId))
   ) {
     setLocalMessages(messages);
   }
