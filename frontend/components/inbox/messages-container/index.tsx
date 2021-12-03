@@ -8,17 +8,17 @@ import { Message, User } from "../messages/types";
 import { useInsertMessageMutation } from "./graphql/hooks/insert-message";
 import { useStreamMessagesSubscription } from "./graphql/hooks/stream-messages";
 import styles from "./styles.module.scss";
-
-interface Props {
-  threadId: number;
-}
+import { selectedThreadVar } from "../index";
+import { useReactiveVar } from "@apollo/client";
 
 const CURRENT_USER_ID = 3; // First user ID in the users table
 
-const MessagesContainer = ({ threadId }: Props): JSX.Element => {
-  const { data } = useStreamMessagesSubscription({
+const MessagesContainer = (): JSX.Element => {
+  const selectedThread = useReactiveVar(selectedThreadVar);
+
+  const { data, loading } = useStreamMessagesSubscription({
     variables: {
-      threadId,
+      threadId: selectedThread?.toString(),
     },
   });
 
@@ -81,7 +81,7 @@ const MessagesContainer = ({ threadId }: Props): JSX.Element => {
           body: newMessage,
           created_by: CURRENT_USER_ID, // hardcoded for now
           status: "sent",
-          thread_id: threadId,
+          thread_id: selectedThread?.toString(),
           id: messageId,
         },
       },
@@ -91,7 +91,7 @@ const MessagesContainer = ({ threadId }: Props): JSX.Element => {
   return (
     <div className={classNames(styles.container, "shadow", "p-3")}>
       <div className={styles.messages}>
-        {localMessages && <Messages messages={localMessages} />}
+        {!loading && localMessages && <Messages messages={localMessages} />}
       </div>
       <MessageBox updateMessages={updateMessages} />
     </div>
