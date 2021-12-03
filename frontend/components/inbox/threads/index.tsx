@@ -84,13 +84,12 @@ const Threads = ({
             className={classNames(
               styles.avatar,
               styles[user?.name.toLowerCase()],
-              "rounded-circle",
-              "me-3"
+              "rounded-circle"
             )}
             key={`avatar-${user?.name.toLowerCase()}`}
           >
             <OverlayTrigger overlay={<Tooltip>{user?.name}</Tooltip>}>
-            {/* @ts-ignore */}
+              {/* @ts-ignore */}
               <Avatar.Image
                 src={user?.gif_url}
                 className={styles.image}
@@ -108,10 +107,12 @@ const Threads = ({
         className={classNames(styles.thread, selected && styles.selected)}
         onClick={() => handleSelect(thread)}
       >
-        <div className={styles['avatar-timestamp-wrapper']}>
+        <div className={styles["avatar-timestamp-wrapper"]}>
           {/* @ts-ignore */}
           <Avatar.Group>{renderAvatars()}</Avatar.Group>
-          <p className={styles.timestamp}>{formattedTimeFromTimestamp(thread.messages[0].created_at)}</p>
+          <p className={styles.timestamp}>
+            {formattedTimeFromTimestamp(thread.messages[0].created_at)}
+          </p>
         </div>
         <p className={styles.message}>{thread.messages[0].body}</p>
       </div>

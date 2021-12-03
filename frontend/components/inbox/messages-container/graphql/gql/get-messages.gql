@@ -6,7 +6,9 @@ query GetMessages($threadId: Int!) {
     created_by
     id
     user {
+      id
       image_url
+      name
     }
   }
 }

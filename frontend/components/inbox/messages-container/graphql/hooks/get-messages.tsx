@@ -19,7 +19,12 @@ export type GetMessagesQuery = {
     created_at: any;
     created_by: number;
     id: any;
-    user: { __typename?: "users"; image_url?: string | null | undefined };
+    user: {
+      __typename?: "users";
+      id: number;
+      image_url?: string | null | undefined;
+      name: string;
+    };
   }>;
 };
 
@@ -35,7 +40,9 @@ export const GetMessagesDocument = gql`
       created_by
       id
       user {
+        id
         image_url
+        name
       }
     }
   }
