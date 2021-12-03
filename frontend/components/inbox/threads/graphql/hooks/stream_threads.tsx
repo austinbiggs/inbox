@@ -25,6 +25,7 @@ export type StreamThreadsSubscription = {
       __typename?: "threads_users";
       user: {
         __typename?: "users";
+        id: number;
         image_url?: string | null | undefined;
         name: string;
       };
@@ -50,6 +51,7 @@ export const StreamThreadsDocument = gql`
       }
       threads_users {
         user {
+          id
           image_url
           name
         }

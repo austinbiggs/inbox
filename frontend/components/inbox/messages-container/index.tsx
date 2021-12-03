@@ -1,6 +1,6 @@
 import { maybe } from "@perfective/common/maybe";
 import classNames from "classnames";
-import * as React from 'react';
+import * as React from "react";
 import { v4 as uuidv4 } from "uuid";
 import { MessageBox } from "../message-box";
 import { Messages } from "../messages";
@@ -24,37 +24,44 @@ const MessagesContainer = ({ threadId }: Props): JSX.Element => {
 
   const [insertMessageMutation] = useInsertMessageMutation();
 
-  const [localMessages, setLocalMessages] = React.useState<Message[] | undefined>(undefined)
+  const [localMessages, setLocalMessages] = React.useState<
+    Message[] | undefined
+  >(undefined);
 
   let userData: User | undefined;
 
   const messages = maybe(data)
     .pick("messages")
-    .to(messages =>
-      messages.map<Message>(message => ({
+    .to((messages) =>
+      messages.map<Message>((message) => ({
         id: message.id,
         message: message.body,
         timestamp: message.created_at,
         user: {
           id: message.created_by,
-          avatar: message.user.image_url
-        }
+          avatar: message.user.image_url,
+        },
       }))
     )
-    .run(messages => {
-      const currentUserMessage = messages.filter(message => message.user.id === CURRENT_USER_ID)[0]
+    .run((messages) => {
+      const currentUserMessage = messages.filter(
+        (message) => message?.user?.id === CURRENT_USER_ID
+      )[0];
       userData = {
-        ...currentUserMessage.user
-      }
+        ...currentUserMessage?.user,
+      };
     })
-    .or(undefined)
+    .or(undefined);
 
-  if ((localMessages === undefined && messages !== undefined) || (messages !== undefined && localMessages?.length < messages.length)) {
-    setLocalMessages(messages)
+  if (
+    (localMessages === undefined && messages !== undefined) ||
+    (messages !== undefined && localMessages?.length < messages.length)
+  ) {
+    setLocalMessages(messages);
   }
 
   const updateMessages = (newMessage: string): void => {
-    const messageId = uuidv4()
+    const messageId = uuidv4();
 
     setLocalMessages([
       ...messages,
@@ -64,9 +71,9 @@ const MessagesContainer = ({ threadId }: Props): JSX.Element => {
         timestamp: new Date().toISOString(),
         user: {
           ...userData,
-        }
-      }
-    ])
+        },
+      },
+    ]);
 
     insertMessageMutation({
       variables: {
@@ -76,10 +83,10 @@ const MessagesContainer = ({ threadId }: Props): JSX.Element => {
           status: "sent",
           thread_id: threadId,
           id: messageId,
-        }
-      }
-    })
-  }
+        },
+      },
+    });
+  };
 
   return (
     <div className={classNames(styles.container, "shadow", "p-3")}>

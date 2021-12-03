@@ -1,4 +1,5 @@
 import * as React from "react";
+import { OverlayTrigger } from "react-bootstrap";
 
 import styles from "./styles.module.scss";
 import { useGetThreadsQuery } from "./graphql/hooks/get_threads";
@@ -7,10 +8,13 @@ import { ThreadData } from "../types";
 import { useReactiveVar } from "@apollo/client";
 import { selectedThreadVar } from "../index";
 import { Avatar } from "../../../../components";
+import { Tooltip } from "react-bootstrap";
 
 interface Props {
   threadData: ThreadData[];
 }
+
+const CURRENT_USER_ID = 3;
 
 const Threads = ({
   threadData: prefetchedThreads = [],
@@ -19,7 +23,7 @@ const Threads = ({
   const selectedThread = useReactiveVar(selectedThreadVar);
 
   const { data } = useGetThreadsQuery({
-    variables: { userId: 3 },
+    variables: { userId: CURRENT_USER_ID },
   });
 
   const freshThreads = data?.threads || [];
@@ -43,7 +47,9 @@ const Threads = ({
 
   const renderThread = (thread: ThreadData) => {
     const selected = thread?.id === selectedThread;
-    const threadUsers = thread?.threads_users;
+    const threadUsers = thread?.threads_users.filter(
+      (threadUser) => threadUser?.user?.id !== CURRENT_USER_ID
+    );
 
     console.log({ thread, threadUsers });
 
@@ -52,15 +58,23 @@ const Threads = ({
         const user = threadUser?.user;
 
         return (
-          <Avatar.Group>
-            <Avatar size="xs" className="me-3">
+          <Avatar
+            size="sm"
+            className={classNames(
+              styles.avatar,
+              styles[user?.name.toLowerCase()],
+              "rounded-circle",
+              "me-3"
+            )}
+          >
+            <OverlayTrigger overlay={<Tooltip>{user?.name}</Tooltip>}>
               <Avatar.Image
                 src={user?.image_url}
-                className="rounded-circle"
+                className={styles.image}
                 alt={user?.name}
               />
-            </Avatar>
-          </Avatar.Group>
+            </OverlayTrigger>
+          </Avatar>
         );
       });
     };
@@ -71,7 +85,7 @@ const Threads = ({
         className={classNames(styles.thread, selected && styles.selected)}
         onClick={() => handleSelect(thread)}
       >
-        {renderAvatars()}
+        <Avatar.Group>{renderAvatars()}</Avatar.Group>
         {`Thread ${thread?.id}`}
       </div>
     );
