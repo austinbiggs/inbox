@@ -22,11 +22,15 @@ const MessagesContainer = (): JSX.Element => {
     },
   });
 
+  console.log({selectedThread});
+
   const [insertMessageMutation] = useInsertMessageMutation();
 
   const [localMessages, setLocalMessages] = React.useState<
     Message[] | undefined
   >(undefined);
+
+  // const [previousThreadId, setPreviousThreadId] = React.useState<number | undefined>(selectedThread)
 
   let userData: User | undefined;
 
@@ -42,6 +46,7 @@ const MessagesContainer = (): JSX.Element => {
           avatar: message?.user?.image_url,
           name: message?.user?.name,
         },
+        threadId: message.thread_id,
       }))
     )
     .run((messages) => {
@@ -54,9 +59,11 @@ const MessagesContainer = (): JSX.Element => {
     })
     .or(undefined);
 
+  console.log('messages', {messages}, {localMessages});
+
   if (
     (localMessages === undefined && messages !== undefined) ||
-    (messages !== undefined && localMessages?.length < messages.length)
+    (messages !== undefined && (localMessages?.length < messages.length || messages[0].threadId !== localMessages?.[0].threadId))
   ) {
     setLocalMessages(messages);
   }
@@ -73,6 +80,7 @@ const MessagesContainer = (): JSX.Element => {
         user: {
           ...userData,
         },
+        threadId: selectedThread,
       },
     ]);
 

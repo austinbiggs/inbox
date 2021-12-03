@@ -62,6 +62,7 @@ const Threads = ({
   }, [threadsLength]);
 
   const handleSelect = (thread: FreshThread) => {
+    console.log('selected', thread.id);
     selectedThreadVar(thread?.id);
   };
 

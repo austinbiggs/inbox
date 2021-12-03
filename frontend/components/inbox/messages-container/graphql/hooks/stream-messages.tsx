@@ -19,6 +19,7 @@ export type StreamMessagesSubscription = {
     created_at: any;
     created_by: number;
     id: any;
+    thread_id: number;
     user: {
       __typename?: "users";
       id: number;
@@ -39,6 +40,7 @@ export const StreamMessagesDocument = gql`
       created_at
       created_by
       id
+      thread_id
       user {
         id
         image_url

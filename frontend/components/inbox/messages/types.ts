@@ -10,6 +10,7 @@ export interface Message {
   message: string;
   timestamp: string;
   user: User;
+  threadId: number;
 }
 
 export interface Thread {
