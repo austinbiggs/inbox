@@ -2486,6 +2486,7 @@ columns and relationships of "users"
 type users {
   created_at: timestamptz!
   email: String!
+  gif_url: String
   id: Int!
   image_url: String
 
@@ -2713,6 +2714,7 @@ input users_bool_exp {
   _or: [users_bool_exp!]
   created_at: timestamptz_comparison_exp
   email: String_comparison_exp
+  gif_url: String_comparison_exp
   id: Int_comparison_exp
   image_url: String_comparison_exp
   messages: messages_bool_exp
@@ -2750,6 +2752,7 @@ input type for inserting data into table "users"
 input users_insert_input {
   created_at: timestamptz
   email: String
+  gif_url: String
   id: Int
   image_url: String
   messages: messages_arr_rel_insert_input
@@ -2765,6 +2768,7 @@ aggregate max on columns
 type users_max_fields {
   created_at: timestamptz
   email: String
+  gif_url: String
   id: Int
   image_url: String
   name: String
@@ -2777,6 +2781,7 @@ aggregate min on columns
 type users_min_fields {
   created_at: timestamptz
   email: String
+  gif_url: String
   id: Int
   image_url: String
   name: String
@@ -2825,6 +2830,7 @@ Ordering options when selecting data from "users".
 input users_order_by {
   created_at: order_by
   email: order_by
+  gif_url: order_by
   id: order_by
   image_url: order_by
   messages_aggregate: messages_aggregate_order_by
@@ -2858,6 +2864,11 @@ enum users_select_column {
   """
   column name
   """
+  gif_url
+
+  """
+  column name
+  """
   id
 
   """
@@ -2882,6 +2893,7 @@ input type for updating data in table "users"
 input users_set_input {
   created_at: timestamptz
   email: String
+  gif_url: String
   id: Int
   image_url: String
   name: String
@@ -2929,6 +2941,11 @@ enum users_update_column {
   column name
   """
   email
+
+  """
+  column name
+  """
+  gif_url
 
   """
   column name

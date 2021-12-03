@@ -653,6 +653,7 @@ export type threads_variance_fieldsFieldPolicy = {
 export type usersKeySpecifier = (
   | "created_at"
   | "email"
+  | "gif_url"
   | "id"
   | "image_url"
   | "messages"
@@ -668,6 +669,7 @@ export type usersKeySpecifier = (
 export type usersFieldPolicy = {
   created_at?: FieldPolicy<any> | FieldReadFunction<any>;
   email?: FieldPolicy<any> | FieldReadFunction<any>;
+  gif_url?: FieldPolicy<any> | FieldReadFunction<any>;
   id?: FieldPolicy<any> | FieldReadFunction<any>;
   image_url?: FieldPolicy<any> | FieldReadFunction<any>;
   messages?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -725,6 +727,7 @@ export type users_avg_fieldsFieldPolicy = {
 export type users_max_fieldsKeySpecifier = (
   | "created_at"
   | "email"
+  | "gif_url"
   | "id"
   | "image_url"
   | "name"
@@ -734,6 +737,7 @@ export type users_max_fieldsKeySpecifier = (
 export type users_max_fieldsFieldPolicy = {
   created_at?: FieldPolicy<any> | FieldReadFunction<any>;
   email?: FieldPolicy<any> | FieldReadFunction<any>;
+  gif_url?: FieldPolicy<any> | FieldReadFunction<any>;
   id?: FieldPolicy<any> | FieldReadFunction<any>;
   image_url?: FieldPolicy<any> | FieldReadFunction<any>;
   name?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -742,6 +746,7 @@ export type users_max_fieldsFieldPolicy = {
 export type users_min_fieldsKeySpecifier = (
   | "created_at"
   | "email"
+  | "gif_url"
   | "id"
   | "image_url"
   | "name"
@@ -751,6 +756,7 @@ export type users_min_fieldsKeySpecifier = (
 export type users_min_fieldsFieldPolicy = {
   created_at?: FieldPolicy<any> | FieldReadFunction<any>;
   email?: FieldPolicy<any> | FieldReadFunction<any>;
+  gif_url?: FieldPolicy<any> | FieldReadFunction<any>;
   id?: FieldPolicy<any> | FieldReadFunction<any>;
   image_url?: FieldPolicy<any> | FieldReadFunction<any>;
   name?: FieldPolicy<any> | FieldReadFunction<any>;

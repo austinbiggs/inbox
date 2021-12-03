@@ -69,7 +69,7 @@ const Threads = ({
           >
             <OverlayTrigger overlay={<Tooltip>{user?.name}</Tooltip>}>
               <Avatar.Image
-                src={user?.image_url}
+                src={user?.gif_url}
                 className={styles.image}
                 alt={user?.name}
               />

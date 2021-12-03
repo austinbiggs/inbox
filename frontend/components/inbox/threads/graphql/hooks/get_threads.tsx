@@ -26,7 +26,7 @@ export type GetThreadsQuery = {
       user: {
         __typename?: "users";
         id: number;
-        image_url?: string | null | undefined;
+        gif_url?: string | null | undefined;
         name: string;
       };
     }>;
@@ -52,7 +52,7 @@ export const GetThreadsDocument = gql`
       threads_users {
         user {
           id
-          image_url
+          gif_url
           name
         }
       }

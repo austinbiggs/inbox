@@ -9,7 +9,7 @@ subscription StreamThreads($userId: Int!) {
     threads_users {
       user {
         id
-        image_url
+        gif_url
         name
       }
     }

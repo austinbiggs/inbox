@@ -1574,6 +1574,7 @@ export type Users = {
   __typename?: "users";
   created_at: Scalars["timestamptz"];
   email: Scalars["String"];
+  gif_url?: Maybe<Scalars["String"]>;
   id: Scalars["Int"];
   image_url?: Maybe<Scalars["String"]>;
   /** An array relationship */
@@ -1688,6 +1689,7 @@ export type Users_Bool_Exp = {
   _or?: InputMaybe<Array<Users_Bool_Exp>>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   email?: InputMaybe<String_Comparison_Exp>;
+  gif_url?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   image_url?: InputMaybe<String_Comparison_Exp>;
   messages?: InputMaybe<Messages_Bool_Exp>;
@@ -1714,6 +1716,7 @@ export type Users_Inc_Input = {
 export type Users_Insert_Input = {
   created_at?: InputMaybe<Scalars["timestamptz"]>;
   email?: InputMaybe<Scalars["String"]>;
+  gif_url?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["Int"]>;
   image_url?: InputMaybe<Scalars["String"]>;
   messages?: InputMaybe<Messages_Arr_Rel_Insert_Input>;
@@ -1728,6 +1731,7 @@ export type Users_Max_Fields = {
   __typename?: "users_max_fields";
   created_at?: Maybe<Scalars["timestamptz"]>;
   email?: Maybe<Scalars["String"]>;
+  gif_url?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["Int"]>;
   image_url?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
@@ -1739,6 +1743,7 @@ export type Users_Min_Fields = {
   __typename?: "users_min_fields";
   created_at?: Maybe<Scalars["timestamptz"]>;
   email?: Maybe<Scalars["String"]>;
+  gif_url?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["Int"]>;
   image_url?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
@@ -1772,6 +1777,7 @@ export type Users_On_Conflict = {
 export type Users_Order_By = {
   created_at?: InputMaybe<Order_By>;
   email?: InputMaybe<Order_By>;
+  gif_url?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   image_url?: InputMaybe<Order_By>;
   messages_aggregate?: InputMaybe<Messages_Aggregate_Order_By>;
@@ -1793,6 +1799,8 @@ export enum Users_Select_Column {
   /** column name */
   Email = "email",
   /** column name */
+  GifUrl = "gif_url",
+  /** column name */
   Id = "id",
   /** column name */
   ImageUrl = "image_url",
@@ -1806,6 +1814,7 @@ export enum Users_Select_Column {
 export type Users_Set_Input = {
   created_at?: InputMaybe<Scalars["timestamptz"]>;
   email?: InputMaybe<Scalars["String"]>;
+  gif_url?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["Int"]>;
   image_url?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
@@ -1842,6 +1851,8 @@ export enum Users_Update_Column {
   CreatedAt = "created_at",
   /** column name */
   Email = "email",
+  /** column name */
+  GifUrl = "gif_url",
   /** column name */
   Id = "id",
   /** column name */
