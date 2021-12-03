@@ -4,6 +4,7 @@ import * as React from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Avatar from "../../../../components/Avatar";
 import { selectedThreadVar } from "../index";
+import { formattedTimeFromTimestamp } from "../message/utils";
 import { ThreadData } from "../types";
 import { useGetThreadsQuery } from "./graphql/hooks/get_threads";
 import styles from "./styles.module.scss";
@@ -107,9 +108,12 @@ const Threads = ({
         className={classNames(styles.thread, selected && styles.selected)}
         onClick={() => handleSelect(thread)}
       >
-        {/* @ts-ignore */}
-        <Avatar.Group>{renderAvatars()}</Avatar.Group>
-        {`Thread ${thread?.id}`}
+        <div className={styles['avatar-timestamp-wrapper']}>
+          {/* @ts-ignore */}
+          <Avatar.Group>{renderAvatars()}</Avatar.Group>
+          <p className={styles.timestamp}>{formattedTimeFromTimestamp(thread.messages[0].created_at)}</p>
+        </div>
+        <p className={styles.message}>{thread.messages[0].body}</p>
       </div>
     );
   };

@@ -11,7 +11,9 @@ interface Props {
   threadData: ThreadData[];
 }
 
-export const selectedThreadVar = makeVar<number | null>(null);
+const PRESELECTED_THREAD_ID = 316;
+
+export const selectedThreadVar = makeVar<number>(PRESELECTED_THREAD_ID);
 
 const Inbox = ({ threadData }: Props): JSX.Element => {
   return (
