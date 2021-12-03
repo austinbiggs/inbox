@@ -37,6 +37,70 @@
       flex-direction: row;
       justify-content: flex-start;
       align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid lightgray;
+
+      &:last-of-type {
+        border-bottom: none;
+      }
+
+      &.selected {
+        color: blue;
+      }
+
+      .avatar {
+        background-color: lightgray;
+
+        &.charmander {
+          background-color: rgba(232, 140, 74, 0.4);
+        }
+
+        &.squirtle {
+          background-color: rgba(99, 149, 230, 0.4);
+        }
+
+        &.bulbasaur {
+          background-color: rgba(74, 158, 84, 0.4);
+        }
+
+        &.gengar {
+          background-color: rgba(142, 124, 222, 0.6);
+        }
+
+        &.haunter {
+          background-color: rgba(142, 124, 222, 0.6);
+        }
+
+        &.gastly {
+          background-color: rgba(142, 124, 222, 0.4);
+        }
+
+        &.eevee {
+          background-color: rgba(105, 81, 79, 0.2);
+        }
+
+        &.pikachu {
+          background-color: rgba(242, 230, 124, 0.8);
+        }
+
+        &.pichu {
+          background-color: rgba(242, 230, 124, 0.4);
+        }
+
+        &.togepi {
+          background-color: rgba(158, 200, 255, 0.4);
+        }
+
+        &.charizard {
+          background-color: rgba(232, 140, 74, 0.6);
+        }
+
+        .image {
+          width: 70%;
+          height: 70%;
+          margin: 15%;
+        }
+      }
     }
   }
 }

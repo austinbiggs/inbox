@@ -5,10 +5,13 @@ import { MessagesContainer } from "./messages-container";
 import { Threads } from "./threads";
 import styles from "./styles.module.scss";
 import { ThreadData } from "./types";
+import { makeVar } from "@apollo/client";
 
 interface Props {
-  threadData: ThreadData;
+  threadData: ThreadData[];
 }
+
+export const selectedThreadVar = makeVar<number | null>(null);
 
 const Inbox = ({ threadData }: Props): JSX.Element => {
   return (
@@ -18,7 +21,7 @@ const Inbox = ({ threadData }: Props): JSX.Element => {
           <Threads threadData={threadData} />
         </Col>
         <Col xs={8} sm={8} md={8} lg={8} xl={8}>
-          <MessagesContainer threadId={174} />
+          <MessagesContainer />
         </Col>
       </Row>
     </div>

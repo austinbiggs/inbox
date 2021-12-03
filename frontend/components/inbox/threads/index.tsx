@@ -1,26 +1,56 @@
-import * as React from "react";
-
-import styles from "./styles.module.scss";
-import { useGetThreadsQuery } from "./graphql/hooks/get_threads";
+import { useReactiveVar } from "@apollo/client";
 import classNames from "classnames";
+import * as React from "react";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import Avatar from "../../../../components/Avatar";
+import { selectedThreadVar } from "../index";
 import { ThreadData } from "../types";
+import { useGetThreadsQuery } from "./graphql/hooks/get_threads";
+import styles from "./styles.module.scss";
 
 interface Props {
-  threadData: ThreadData;
+  threadData: ThreadData[];
 }
 
-const Threads = ({ threadData }: Props): JSX.Element => {
-  console.log('Threads: ', { threadData });
-  const { data, error, loading } = useGetThreadsQuery({
-    variables: { userId: 3 },
+// Sloppy but we need to get rid of type errors
+interface FreshThread {
+  __typename?: "threads";
+  id: number;
+  messages: {
+    __typename?: "messages";
+    body: string;
+    created_at: string;
+    created_by: number;
+  }[];
+  threads_users: {
+    __typename?: "threads_users";
+    user: {
+      __typename?: "users";
+      id: number;
+      gif_url?: string | null | undefined;
+      name: string;
+    };
+  }[];
+}
+
+const CURRENT_USER_ID = 3;
+
+const Threads = ({
+  threadData: prefetchedThreads = [],
+}: Props): JSX.Element => {
+  // hooks
+  const selectedThread = useReactiveVar(selectedThreadVar);
+
+  const { data } = useGetThreadsQuery({
+    variables: { userId: CURRENT_USER_ID },
   });
 
-  console.log({ data, error, loading });
-
-  const threads = [1, 2, 3, 5, 6, 7, 8, 9, 10];
+  const freshThreads: FreshThread[] = data?.threads || [];
+  const threads = [...prefetchedThreads, ...freshThreads] as ThreadData[];
   const threadsLength = threads.length;
-
   const threadsTopRef = React.useRef<HTMLDivElement | null>(null);
+
+  console.log({ threads, freshThreads, prefetchedThreads });
 
   const scrollToTopOfThreads = () => {
     threadsTopRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -30,17 +60,62 @@ const Threads = ({ threadData }: Props): JSX.Element => {
     scrollToTopOfThreads();
   }, [threadsLength]);
 
-  const renderThread = (thread: number) => {
+  const handleSelect = (thread: FreshThread) => {
+    selectedThreadVar(thread?.id);
+  };
+
+  const renderThread = (thread: FreshThread) => {
+    const selected = thread?.id === selectedThread;
+    const threadUsers = thread?.threads_users.filter(
+      (threadUser) => threadUser?.user?.id !== CURRENT_USER_ID
+    );
+
+    console.log({ thread, threadUsers });
+
+    const renderAvatars = () => {
+      return threadUsers.map((threadUser) => {
+        const user = threadUser?.user;
+
+        return (
+          // @ts-ignore
+          <Avatar
+            size="sm"
+            className={classNames(
+              styles.avatar,
+              styles[user?.name.toLowerCase()],
+              "rounded-circle",
+              "me-3"
+            )}
+            key={`avatar-${user?.name.toLowerCase()}`}
+          >
+            <OverlayTrigger overlay={<Tooltip>{user?.name}</Tooltip>}>
+            {/* @ts-ignore */}
+              <Avatar.Image
+                src={user?.gif_url}
+                className={styles.image}
+                alt={user?.name}
+              />
+            </OverlayTrigger>
+          </Avatar>
+        );
+      });
+    };
+
     return (
       <div
-        key={`thread-${thread}`}
-        className={styles.thread}
-      >{`Thread ${thread}`}</div>
+        key={`thread-${thread?.id}`}
+        className={classNames(styles.thread, selected && styles.selected)}
+        onClick={() => handleSelect(thread)}
+      >
+        {/* @ts-ignore */}
+        <Avatar.Group>{renderAvatars()}</Avatar.Group>
+        {`Thread ${thread?.id}`}
+      </div>
     );
   };
 
   const renderThreads = () => {
-    return threads.map((thread) => renderThread(thread));
+    return freshThreads.map((thread) => renderThread(thread));
   };
 
   return (

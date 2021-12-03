@@ -1,5 +1,5 @@
 query GetThreads($userId: Int!) {
-  threads(where: {threads_users: {user_id: {_eq: $userId}}}) {
+  threads(where: {threads_users: {user_id: {_eq: $userId}}}, limit: 25) {
     id
     messages(limit: 1, order_by: {created_at: desc}, where: {status: {_eq: "sent"}}) {
       body
@@ -9,7 +9,7 @@ query GetThreads($userId: Int!) {
     threads_users {
       user {
         id
-        image_url
+        gif_url
         name
       }
     }

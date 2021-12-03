@@ -1522,6 +1522,66 @@ type threads {
   """
   An array relationship
   """
+  testing_this(
+    """
+    distinct select on columns
+    """
+    distinct_on: [messages_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [messages_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: messages_bool_exp
+  ): [messages!]!
+
+  """
+  An aggregate relationship
+  """
+  testing_this_aggregate(
+    """
+    distinct select on columns
+    """
+    distinct_on: [messages_select_column!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [messages_order_by!]
+
+    """
+    filter the rows returned
+    """
+    where: messages_bool_exp
+  ): messages_aggregate!
+
+  """
+  An array relationship
+  """
   threads_users(
     """
     distinct select on columns
@@ -1668,6 +1728,7 @@ input threads_bool_exp {
   id: Int_comparison_exp
   latest_message: messages_bool_exp
   messages: messages_bool_exp
+  testing_this: messages_bool_exp
   threads_users: threads_users_bool_exp
   updated_at: timestamptz_comparison_exp
   user: users_bool_exp
@@ -1700,6 +1761,7 @@ input threads_insert_input {
   id: Int
   latest_message: messages_obj_rel_insert_input
   messages: messages_arr_rel_insert_input
+  testing_this: messages_arr_rel_insert_input
   threads_users: threads_users_arr_rel_insert_input
   updated_at: timestamptz
   user: users_obj_rel_insert_input
@@ -1790,6 +1852,7 @@ input threads_order_by {
   id: order_by
   latest_message: messages_order_by
   messages_aggregate: messages_aggregate_order_by
+  testing_this_aggregate: messages_aggregate_order_by
   threads_users_aggregate: threads_users_aggregate_order_by
   updated_at: order_by
   user: users_order_by
@@ -2423,6 +2486,7 @@ columns and relationships of "users"
 type users {
   created_at: timestamptz!
   email: String!
+  gif_url: String
   id: Int!
   image_url: String
 
@@ -2650,6 +2714,7 @@ input users_bool_exp {
   _or: [users_bool_exp!]
   created_at: timestamptz_comparison_exp
   email: String_comparison_exp
+  gif_url: String_comparison_exp
   id: Int_comparison_exp
   image_url: String_comparison_exp
   messages: messages_bool_exp
@@ -2687,6 +2752,7 @@ input type for inserting data into table "users"
 input users_insert_input {
   created_at: timestamptz
   email: String
+  gif_url: String
   id: Int
   image_url: String
   messages: messages_arr_rel_insert_input
@@ -2702,6 +2768,7 @@ aggregate max on columns
 type users_max_fields {
   created_at: timestamptz
   email: String
+  gif_url: String
   id: Int
   image_url: String
   name: String
@@ -2714,6 +2781,7 @@ aggregate min on columns
 type users_min_fields {
   created_at: timestamptz
   email: String
+  gif_url: String
   id: Int
   image_url: String
   name: String
@@ -2762,6 +2830,7 @@ Ordering options when selecting data from "users".
 input users_order_by {
   created_at: order_by
   email: order_by
+  gif_url: order_by
   id: order_by
   image_url: order_by
   messages_aggregate: messages_aggregate_order_by
@@ -2795,6 +2864,11 @@ enum users_select_column {
   """
   column name
   """
+  gif_url
+
+  """
+  column name
+  """
   id
 
   """
@@ -2819,6 +2893,7 @@ input type for updating data in table "users"
 input users_set_input {
   created_at: timestamptz
   email: String
+  gif_url: String
   id: Int
   image_url: String
   name: String
@@ -2866,6 +2941,11 @@ enum users_update_column {
   column name
   """
   email
+
+  """
+  column name
+  """
+  gif_url
 
   """
   column name

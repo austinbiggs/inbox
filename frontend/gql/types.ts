@@ -857,6 +857,10 @@ export type Threads = {
   /** An aggregate relationship */
   messages_aggregate: Messages_Aggregate;
   /** An array relationship */
+  testing_this: Array<Messages>;
+  /** An aggregate relationship */
+  testing_this_aggregate: Messages_Aggregate;
+  /** An array relationship */
   threads_users: Array<Threads_Users>;
   /** An aggregate relationship */
   threads_users_aggregate: Threads_Users_Aggregate;
@@ -876,6 +880,24 @@ export type ThreadsMessagesArgs = {
 
 /** columns and relationships of "threads" */
 export type ThreadsMessages_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Messages_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
+  order_by?: InputMaybe<Array<Messages_Order_By>>;
+  where?: InputMaybe<Messages_Bool_Exp>;
+};
+
+/** columns and relationships of "threads" */
+export type ThreadsTesting_ThisArgs = {
+  distinct_on?: InputMaybe<Array<Messages_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
+  order_by?: InputMaybe<Array<Messages_Order_By>>;
+  where?: InputMaybe<Messages_Bool_Exp>;
+};
+
+/** columns and relationships of "threads" */
+export type ThreadsTesting_This_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Messages_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]>;
   offset?: InputMaybe<Scalars["Int"]>;
@@ -975,6 +997,7 @@ export type Threads_Bool_Exp = {
   id?: InputMaybe<Int_Comparison_Exp>;
   latest_message?: InputMaybe<Messages_Bool_Exp>;
   messages?: InputMaybe<Messages_Bool_Exp>;
+  testing_this?: InputMaybe<Messages_Bool_Exp>;
   threads_users?: InputMaybe<Threads_Users_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
@@ -999,6 +1022,7 @@ export type Threads_Insert_Input = {
   id?: InputMaybe<Scalars["Int"]>;
   latest_message?: InputMaybe<Messages_Obj_Rel_Insert_Input>;
   messages?: InputMaybe<Messages_Arr_Rel_Insert_Input>;
+  testing_this?: InputMaybe<Messages_Arr_Rel_Insert_Input>;
   threads_users?: InputMaybe<Threads_Users_Arr_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars["timestamptz"]>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
@@ -1068,6 +1092,7 @@ export type Threads_Order_By = {
   id?: InputMaybe<Order_By>;
   latest_message?: InputMaybe<Messages_Order_By>;
   messages_aggregate?: InputMaybe<Messages_Aggregate_Order_By>;
+  testing_this_aggregate?: InputMaybe<Messages_Aggregate_Order_By>;
   threads_users_aggregate?: InputMaybe<Threads_Users_Aggregate_Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
@@ -1549,6 +1574,7 @@ export type Users = {
   __typename?: "users";
   created_at: Scalars["timestamptz"];
   email: Scalars["String"];
+  gif_url?: Maybe<Scalars["String"]>;
   id: Scalars["Int"];
   image_url?: Maybe<Scalars["String"]>;
   /** An array relationship */
@@ -1663,6 +1689,7 @@ export type Users_Bool_Exp = {
   _or?: InputMaybe<Array<Users_Bool_Exp>>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   email?: InputMaybe<String_Comparison_Exp>;
+  gif_url?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   image_url?: InputMaybe<String_Comparison_Exp>;
   messages?: InputMaybe<Messages_Bool_Exp>;
@@ -1689,6 +1716,7 @@ export type Users_Inc_Input = {
 export type Users_Insert_Input = {
   created_at?: InputMaybe<Scalars["timestamptz"]>;
   email?: InputMaybe<Scalars["String"]>;
+  gif_url?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["Int"]>;
   image_url?: InputMaybe<Scalars["String"]>;
   messages?: InputMaybe<Messages_Arr_Rel_Insert_Input>;
@@ -1703,6 +1731,7 @@ export type Users_Max_Fields = {
   __typename?: "users_max_fields";
   created_at?: Maybe<Scalars["timestamptz"]>;
   email?: Maybe<Scalars["String"]>;
+  gif_url?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["Int"]>;
   image_url?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
@@ -1714,6 +1743,7 @@ export type Users_Min_Fields = {
   __typename?: "users_min_fields";
   created_at?: Maybe<Scalars["timestamptz"]>;
   email?: Maybe<Scalars["String"]>;
+  gif_url?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["Int"]>;
   image_url?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
@@ -1747,6 +1777,7 @@ export type Users_On_Conflict = {
 export type Users_Order_By = {
   created_at?: InputMaybe<Order_By>;
   email?: InputMaybe<Order_By>;
+  gif_url?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   image_url?: InputMaybe<Order_By>;
   messages_aggregate?: InputMaybe<Messages_Aggregate_Order_By>;
@@ -1768,6 +1799,8 @@ export enum Users_Select_Column {
   /** column name */
   Email = "email",
   /** column name */
+  GifUrl = "gif_url",
+  /** column name */
   Id = "id",
   /** column name */
   ImageUrl = "image_url",
@@ -1781,6 +1814,7 @@ export enum Users_Select_Column {
 export type Users_Set_Input = {
   created_at?: InputMaybe<Scalars["timestamptz"]>;
   email?: InputMaybe<Scalars["String"]>;
+  gif_url?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["Int"]>;
   image_url?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
@@ -1817,6 +1851,8 @@ export enum Users_Update_Column {
   CreatedAt = "created_at",
   /** column name */
   Email = "email",
+  /** column name */
+  GifUrl = "gif_url",
   /** column name */
   Id = "id",
   /** column name */

@@ -26,7 +26,7 @@ export type GetThreadsQuery = {
       user: {
         __typename?: "users";
         id: number;
-        image_url?: string | null | undefined;
+        gif_url?: string | null | undefined;
         name: string;
       };
     }>;
@@ -35,7 +35,10 @@ export type GetThreadsQuery = {
 
 export const GetThreadsDocument = gql`
   query GetThreads($userId: Int!) {
-    threads(where: { threads_users: { user_id: { _eq: $userId } } }) {
+    threads(
+      where: { threads_users: { user_id: { _eq: $userId } } }
+      limit: 25
+    ) {
       id
       messages(
         limit: 1
@@ -49,7 +52,7 @@ export const GetThreadsDocument = gql`
       threads_users {
         user {
           id
-          image_url
+          gif_url
           name
         }
       }
