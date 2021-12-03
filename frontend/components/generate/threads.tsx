@@ -256,12 +256,12 @@ const GenerateThreads: React.FC<Props> = (props) => {
         if (live) {
           addMessage({
             emoji: "⌛",
-            title: "Waiting 10 seconds",
+            title: "Waiting 3 seconds",
           });
 
           setTimeout(() => {
             generateThread();
-          }, 10000);
+          }, 3000);
         }
       })
       .catch((error) => {
