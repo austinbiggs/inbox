@@ -4,7 +4,6 @@ import { Message as MessageData } from "../messages/types";
 
 import styles from "./styles.module.scss";
 import { formattedTimeFromTimestamp } from "./utils";
-import Image from "next/image";
 import { Avatar } from "../../../../components";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
@@ -27,24 +26,17 @@ const Message = ({ message, timestamp, user }: MessageData): JSX.Element => {
           sentOrReceived ? styles["avatar-container-sent"] : ""
         )}
       >
-        {/*<Image*/}
-        {/*  src={user.avatar}*/}
-        {/*  alt="Avatar"*/}
-        {/*  className={styles.avatar}*/}
-        {/*  width={50}*/}
-        {/*  height={50}*/}
-        {/*  priority*/}
-        {/*/>*/}
+        {/* @ts-ignore */}
         <Avatar
           size="sm"
           className={classNames(
             styles.avatar,
             styles[user?.name.toLowerCase()],
-            "rounded-circle",
-            "me-3"
+            "rounded-circle"
           )}
         >
           <OverlayTrigger overlay={<Tooltip>{user?.name}</Tooltip>}>
+            {/* @ts-ignore */}
             <Avatar.Image
               src={user?.avatar}
               className={styles.image}
