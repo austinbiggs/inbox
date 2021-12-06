@@ -1,0 +1,101 @@
+[
+  {
+    "id": 13,
+    "email": "pichu@pokemon.com",
+    "gif_url": "https://img.pokemondb.net/sprites/black-white/anim/normal/pichu.gif",
+    "image_url": "https://img.pokemondb.net/sprites/black-white/normal/pichu.png",
+    "name": "Pichu",
+    "created_at": "2021-11-05T23:55:13.777223+00:00",
+    "updated_at": "2021-12-03T05:36:59.46673+00:00"
+  },
+  {
+    "id": 14,
+    "email": "togepi@pokemon.com",
+    "gif_url": "https://img.pokemondb.net/sprites/black-white/anim/normal/togepi.gif",
+    "image_url": "https://img.pokemondb.net/sprites/black-white/normal/togepi.png",
+    "name": "Togepi",
+    "created_at": "2021-11-05T23:55:59.678706+00:00",
+    "updated_at": "2021-12-03T05:37:29.440712+00:00"
+  },
+  {
+    "id": 15,
+    "email": "charizard@pokemon.com",
+    "gif_url": "https://img.pokemondb.net/sprites/black-white/anim/normal/charizard.gif",
+    "image_url": "https://img.pokemondb.net/sprites/black-white/normal/charizard.png",
+    "name": "Charizard",
+    "created_at": "2021-11-05T23:57:18.057663+00:00",
+    "updated_at": "2021-12-03T05:37:41.462017+00:00"
+  },
+  {
+    "id": 3,
+    "email": "charmander@pokemon.com",
+    "gif_url": "https://img.pokemondb.net/sprites/black-white/anim/normal/charmander.gif",
+    "image_url": "https://img.pokemondb.net/sprites/black-white/normal/charmander.png",
+    "name": "Charmander",
+    "created_at": "2021-11-05T23:27:18.607173+00:00",
+    "updated_at": "2021-12-03T05:35:15.041229+00:00"
+  },
+  {
+    "id": 4,
+    "email": "squirtle@pokemon.com",
+    "gif_url": "https://img.pokemondb.net/sprites/black-white/anim/normal/squirtle.gif",
+    "image_url": "https://img.pokemondb.net/sprites/black-white/normal/squirtle.png",
+    "name": "Squirtle",
+    "created_at": "2021-11-05T23:35:47.208475+00:00",
+    "updated_at": "2021-12-03T05:35:38.806801+00:00"
+  },
+  {
+    "id": 5,
+    "email": "bulbasaur@pokemon.com",
+    "gif_url": "https://img.pokemondb.net/sprites/black-white/anim/normal/bulbasaur.gif",
+    "image_url": "https://img.pokemondb.net/sprites/black-white/normal/bulbasaur.png",
+    "name": "Bulbasaur",
+    "created_at": "2021-11-05T23:35:59.905541+00:00",
+    "updated_at": "2021-12-03T05:35:53.924549+00:00"
+  },
+  {
+    "id": 8,
+    "email": "gengar@pokemon.com",
+    "gif_url": "https://img.pokemondb.net/sprites/black-white/anim/normal/gengar.gif",
+    "image_url": "https://img.pokemondb.net/sprites/black-white/normal/gengar.png",
+    "name": "Gengar",
+    "created_at": "2021-11-05T23:53:56.367065+00:00",
+    "updated_at": "2021-12-03T05:36:16.161507+00:00"
+  },
+  {
+    "id": 9,
+    "email": "haunter@pokemon.com",
+    "gif_url": "https://img.pokemondb.net/sprites/black-white/anim/normal/haunter.gif",
+    "image_url": "https://img.pokemondb.net/sprites/black-white/normal/haunter.png",
+    "name": "Haunter",
+    "created_at": "2021-11-05T23:54:09.949959+00:00",
+    "updated_at": "2021-12-03T05:36:24.051654+00:00"
+  },
+  {
+    "id": 10,
+    "email": "gastly@pokemon.com",
+    "gif_url": "https://img.pokemondb.net/sprites/black-white/anim/normal/gastly.gif",
+    "image_url": "https://img.pokemondb.net/sprites/black-white/normal/gastly.png",
+    "name": "Gastly",
+    "created_at": "2021-11-05T23:54:28.119323+00:00",
+    "updated_at": "2021-12-03T05:36:33.80028+00:00"
+  },
+  {
+    "id": 11,
+    "email": "eevee@pokemon.com",
+    "gif_url": "https://img.pokemondb.net/sprites/black-white/anim/normal/eevee.gif",
+    "image_url": "https://img.pokemondb.net/sprites/black-white/normal/eevee.png",
+    "name": "Eevee",
+    "created_at": "2021-11-05T23:54:41.812454+00:00",
+    "updated_at": "2021-12-03T05:36:41.252264+00:00"
+  },
+  {
+    "id": 12,
+    "email": "pikachu@pokemon.com",
+    "gif_url": "https://img.pokemondb.net/sprites/black-white/anim/normal/pikachu.gif",
+    "image_url": "https://img.pokemondb.net/sprites/black-white/normal/pikachu.png",
+    "name": "Pikachu",
+    "created_at": "2021-11-05T23:54:59.362565+00:00",
+    "updated_at": "2021-12-03T05:36:51.42494+00:00"
+  }
+]
