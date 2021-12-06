@@ -54,7 +54,8 @@ CREATE TABLE public.users (
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     email text NOT NULL,
     name text NOT NULL,
-    image_url text
+    image_url text,
+    gif_url text
 );
 CREATE SEQUENCE public.users_id_seq
     AS integer
