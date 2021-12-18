@@ -3045,10 +3045,10 @@ elliptic@^6.5.3:
     minimalistic-assert "^1.0.1"
     minimalistic-crypto-utils "^1.0.1"
 
-emoji-picker-react@^3.4.11:
-  version "3.4.11"
-  resolved "https://registry.yarnpkg.com/emoji-picker-react/-/emoji-picker-react-3.4.11.tgz#0691525ae0a987d7d2bf9419db9c2024ee2224ef"
-  integrity sha512-fYND7GfAMHnmydIF7nZUS/vNmiTkoZRnyj8+I1Gkrs54sF6bAgSxbVdD+wyvwt/M+CaVynJ0gOH30AL9DxL60A==
+emoji-picker-react@^3.4.12:
+  version "3.4.12"
+  resolved "https://registry.yarnpkg.com/emoji-picker-react/-/emoji-picker-react-3.4.12.tgz#4fc7a1f0e00241d3f9bd04172e25a3a08c0d8ada"
+  integrity sha512-i2VRfKRltFJjsY5ste7UPOn24uXcb4yuOVU6u9Cm3gsSc1MvCqr3XsBGhhhK8jPLeDB9llWtFQ6vABZSqNKQxA==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
