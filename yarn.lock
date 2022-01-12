@@ -774,7 +774,7 @@
     parse-filepath "^1.0.2"
     tslib "~2.3.0"
 
-"@graphql-codegen/plugin-helpers@^2.3.0", "@graphql-codegen/plugin-helpers@^2.3.2":
+"@graphql-codegen/plugin-helpers@^2.3.2":
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-2.3.2.tgz#3f9ba625791901d19be733db1dfc9a3dbd0dac44"
   integrity sha512-19qFA5XMAWaAY64sBljjDPYfHjE+QMk/+oalCyY13WjSlcLDvYPfmFlCNgFSsydArDELlHR8T1GMbA7C42M8TA==
@@ -6104,10 +6104,10 @@ react-highlight@^0.14.0:
   dependencies:
     highlight.js "^10.5.0"
 
-react-hook-form@^7.22.5:
-  version "7.22.5"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.22.5.tgz#85a135f3c5ae02ccf73096a03fc14b45607e9baa"
-  integrity sha512-Q2zaeQFXdVQ8l3hcywhltH+Nzj4vo50wMVujHDVN/1Xy9IOaSZJwYBXA2CYTpK6rq41fnXviw3jTLb04c7Gu9Q==
+react-hook-form@^7.23.0:
+  version "7.23.0"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.23.0.tgz#1332aea2049187a443b7b6f74e1f681076f96002"
+  integrity sha512-bO1JCkPAjmpuKhfUpFhsjWn2RIPgWUpep8qpMAKCoc8NM8ytBA5nDx5p99wNhZWrblYQFvU+dVy9g1oYo/JKoQ==
 
 react-is@17.0.2, react-is@^17.0.2:
   version "17.0.2"
