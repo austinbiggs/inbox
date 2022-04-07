@@ -41,7 +41,7 @@
     "react-chartjs-2": "^4.0.1",
     "react-dom": "17.0.2",
     "react-dropzone": "^12.0.4",
-    "react-flatpickr": "^3.10.7",
+    "react-flatpickr": "^3.10.11",
     "react-highlight": "^0.14.0",
     "react-hook-form": "^7.27.0",
     "react-map-gl": "^7.0.6",
