@@ -1309,10 +1309,10 @@
   resolved "https://registry.yarnpkg.com/@oclif/screen/-/screen-1.0.4.tgz#b740f68609dfae8aa71c3a6cab15d816407ba493"
   integrity sha512-60CHpq+eqnTxLZQ4PGHYNwUX572hgpMHGPtTWMjdTMsAvlm69lZV/4ly6O3sAYkomo4NggGcomrDpBe34rxUqw==
 
-"@perfective/common@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@perfective/common/-/common-0.8.0.tgz#3333e24863f7211a9948b5a80d1b99595e9fa190"
-  integrity sha512-RKnTVG/XCM+f2D9EVGF0KP82CTcOCqOHA5i0ABtFACapjcut6otsSLmXlhicu2213fMND9zujU2jrUuEpFG3/w==
+"@perfective/common@^0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@perfective/common/-/common-0.8.1.tgz#1b75f0633f39849ff3daba3f80fcc983ace3cfdd"
+  integrity sha512-HS90xjY403N/ZYzvHHcz2fR+GLfJZgfqo0sBxvN+RDsLoalrOnXxoNMSEa6U+pY2F92FGex2GhLG9vGfMkXB2w==
 
 "@popperjs/core@^2.10.1":
   version "2.10.2"
