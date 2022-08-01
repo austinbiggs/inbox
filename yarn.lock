@@ -2636,10 +2636,10 @@ elegant-spinner@^1.0.1:
   resolved "https://registry.yarnpkg.com/elegant-spinner/-/elegant-spinner-1.0.1.tgz#db043521c95d7e303fd8f345bedc3349cfb0729e"
   integrity sha1-2wQ1IcldfjA/2PNFvtwzSc+wcp4=
 
-emoji-picker-react@^3.5.1:
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/emoji-picker-react/-/emoji-picker-react-3.5.1.tgz#dbb4cda675a58dc86624d2fc488f75c2f4fc377d"
-  integrity sha512-cuSthFAvUO8Q1N7KJPEgZ7N0JNIWPKgN5GUmKe71UlSD4qFYI/p05RT9nohlWOq6YSFhEy2mI/60zBZiaku4mg==
+emoji-picker-react@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/emoji-picker-react/-/emoji-picker-react-3.6.0.tgz#d371b3ba0bebfa202a58896f31dbc631a66f9b5e"
+  integrity sha512-J5RhEYfxpJQ70dQrLx7E6dKdVOmXI1TXIwTspK/tqwInFDk69a+IvbNJ8X1Xd8MbIA/k+ybreZop7AEncH5jsw==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
