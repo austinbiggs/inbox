@@ -54,7 +54,7 @@
     "subscriptions-transport-ws": "^0.11.0",
     "ts-react-feather-icons": "^1.0.0",
     "underscore": "^1.13.2",
-    "uuid": "^8.3.2"
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@graphql-codegen/add": "^3.0.0",
