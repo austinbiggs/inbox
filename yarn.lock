@@ -924,15 +924,23 @@
     tslib "~2.3.0"
     unixify "^1.0.0"
 
-"@graphql-tools/load@^7.3.0", "@graphql-tools/load@^7.4.1", "@graphql-tools/load@^7.5.1":
-  version "7.5.1"
-  resolved "https://registry.yarnpkg.com/@graphql-tools/load/-/load-7.5.1.tgz#8c7f846d2185ddc1d44fdfbf1ed9cb678f69e40b"
-  integrity sha512-j9XcLYZPZdl/TzzqA83qveJmwcCxgGizt5L1+C1/Z68brTEmQHLdQCOR3Ma3ewESJt6DU05kSTu2raKaunkjRg==
+"@graphql-tools/load@^7.3.0", "@graphql-tools/load@^7.4.1", "@graphql-tools/load@^7.8.3":
+  version "7.8.3"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/load/-/load-7.8.3.tgz#a6028b513d121df49de915db1d00bd168dc7ecc5"
+  integrity sha512-adX6ybyWXkitexayg5Mcc/CGaUqKPZ7iAuaIMpzTryZON9q6AvXDqqqS2mZVIRmtSPou9kfyV9ssfNMkkNUyBQ==
   dependencies:
-    "@graphql-tools/schema" "8.3.1"
-    "@graphql-tools/utils" "^8.6.0"
+    "@graphql-tools/schema" "9.0.7"
+    "@graphql-tools/utils" "9.0.0"
     p-limit "3.1.0"
-    tslib "~2.3.0"
+    tslib "^2.4.0"
+
+"@graphql-tools/merge@8.3.9":
+  version "8.3.9"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/merge/-/merge-8.3.9.tgz#a73f96d9aa1652c5a274659dafdc8cb32ee9a237"
+  integrity sha512-iNOlCIjtgOASeF7YDBF1ybQzVVjrZAlj0viVsg2OA7y35FBns+N/sVNsi6u7aT2KlkUF/UUkbUIP6k6Hd5Aq4w==
+  dependencies:
+    "@graphql-tools/utils" "9.0.0"
+    tslib "^2.4.0"
 
 "@graphql-tools/merge@^8.2.1":
   version "8.2.1"
@@ -984,7 +992,17 @@
     relay-compiler "12.0.0"
     tslib "~2.3.0"
 
-"@graphql-tools/schema@8.3.1", "@graphql-tools/schema@^8.1.2", "@graphql-tools/schema@^8.3.1":
+"@graphql-tools/schema@9.0.7":
+  version "9.0.7"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/schema/-/schema-9.0.7.tgz#847de9b9c7b4c6bc7c590c0f59625ae3ae527765"
+  integrity sha512-ns8MbiMa54iEGHHwVGB0AIcGoedAqQTwnG2pHiyGHL8cWXNtxatcAV3bH+RJvC165nY7JvSovhMo+N43oJb7ng==
+  dependencies:
+    "@graphql-tools/merge" "8.3.9"
+    "@graphql-tools/utils" "9.0.0"
+    tslib "^2.4.0"
+    value-or-promise "1.0.11"
+
+"@graphql-tools/schema@^8.1.2", "@graphql-tools/schema@^8.3.1":
   version "8.3.1"
   resolved "https://registry.yarnpkg.com/@graphql-tools/schema/-/schema-8.3.1.tgz#1ee9da494d2da457643b3c93502b94c3c4b68c74"
   integrity sha512-3R0AJFe715p4GwF067G5i0KCr/XIdvSfDLvTLEiTDQ8V/hwbOHEKHKWlEBHGRQwkG5lwFQlW1aOn7VnlPERnWQ==
@@ -1026,7 +1044,14 @@
   dependencies:
     tslib "~2.3.0"
 
-"@graphql-tools/utils@^8.1.1", "@graphql-tools/utils@^8.3.0", "@graphql-tools/utils@^8.5.1", "@graphql-tools/utils@^8.5.2", "@graphql-tools/utils@^8.6.0", "@graphql-tools/utils@^8.6.1":
+"@graphql-tools/utils@9.0.0":
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-9.0.0.tgz#4e75680d29e866b3de293b4bc9fa4a40aeae0085"
+  integrity sha512-kaCwyWnURxMsYbxzkfylLqFFelu83jKk3BJOOy0GIuxEtgXVS9v7Y/tojljo69Q+jaZ2YxAi3+d8IpM+hx768A==
+  dependencies:
+    tslib "^2.4.0"
+
+"@graphql-tools/utils@^8.1.1", "@graphql-tools/utils@^8.3.0", "@graphql-tools/utils@^8.5.1", "@graphql-tools/utils@^8.5.2", "@graphql-tools/utils@^8.6.1":
   version "8.6.1"
   resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-8.6.1.tgz#52c7eb108f2ca2fd01bdba8eef85077ead1bf882"
   integrity sha512-uxcfHCocp4ENoIiovPxUWZEHOnbXqj3ekWc0rm7fUhW93a1xheARNHcNKhwMTR+UKXVJbTFQdGI1Rl5XdyvDBg==
@@ -6201,7 +6226,12 @@ tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2, tslib@^2.0.0, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0, tslib@~2.3.0:
+tslib@^2, tslib@^2.0.0, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.4.0:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.1.tgz#0d0bfbaac2880b91e22df0768e55be9753a5b17e"
+  integrity sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==
+
+tslib@~2.3.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
   integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
