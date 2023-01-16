@@ -19,7 +19,7 @@
     "type:check": "tsc --pretty --noEmit"
   },
   "dependencies": {
-    "@apollo/client": "^3.5.8",
+    "@apollo/client": "^3.7.4",
     "@bugsnag/js": "^7.16.1",
     "@perfective/common": "^0.8.0",
     "bootstrap": "5.1.3",
